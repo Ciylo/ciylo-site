@@ -19,14 +19,22 @@ export function generateStaticParams() {
   return industryPages.map((i) => ({ slug: i.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/industries/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/industries/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const i = getIndustry(slug);
   if (!i) return {};
-  return { title: `${i.name} technology`, description: i.intro, alternates: { canonical: `/industries/${i.slug}` } };
+  return {
+    title: `${i.name} technology`,
+    description: i.intro,
+    alternates: { canonical: `/industries/${i.slug}` },
+  };
 }
 
-export default async function IndustryPage({ params }: PageProps<"/industries/[slug]">) {
+export default async function IndustryPage({
+  params,
+}: PageProps<"/industries/[slug]">) {
   const { slug } = await params;
   const i = getIndustry(slug);
   if (!i) notFound();
@@ -50,15 +58,39 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
       </PageHero>
 
       <section className="bg-white py-20">
-        <div className={diagram ? "wrap flex flex-col gap-12" : "wrap grid items-center gap-12 lg:grid-cols-2"}>
+        <div
+          className={
+            diagram
+              ? "wrap flex flex-col gap-12"
+              : "wrap grid items-center gap-12 lg:grid-cols-2"
+          }
+        >
           <div className="flex flex-col gap-5">
-            <p className="kicker text-teal-700">What we build for {i.name.toLowerCase()}</p>
-            <SplitHeading text="Where we help most" className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]" />
-            <RevealGroup role="list" className={diagram ? "grid gap-x-10 sm:grid-cols-2" : "flex flex-col"}>
+            <p className="kicker text-teal-700">
+              What we build for {i.name.toLowerCase()}
+            </p>
+            <SplitHeading
+              text="Where we help most"
+              className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]"
+            />
+            <RevealGroup
+              role="list"
+              className={
+                diagram ? "grid gap-x-10 sm:grid-cols-2" : "flex flex-col"
+              }
+            >
               {i.focus.map((f, n) => (
-                <RevealItem key={f} role="listitem" className="flex items-center gap-4 border-t border-ink-150 py-4 last:border-b sm:[&:nth-last-child(2):nth-child(odd)]:border-b">
-                  <span className="font-mono text-xs text-teal-700">{String(n + 1).padStart(2, "0")}</span>
-                  <span className="text-lg font-semibold tracking-[-0.01em]">{f}</span>
+                <RevealItem
+                  key={f}
+                  role="listitem"
+                  className="flex items-center gap-4 border-t border-ink-150 py-4 last:border-b sm:[&:nth-last-child(2):nth-child(odd)]:border-b"
+                >
+                  <span className="font-mono text-xs text-teal-700">
+                    {String(n + 1).padStart(2, "0")}
+                  </span>
+                  <span className="text-lg font-semibold tracking-[-0.01em]">
+                    {f}
+                  </span>
                 </RevealItem>
               ))}
             </RevealGroup>
@@ -69,7 +101,12 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
             </Reveal>
           ) : (
             <Reveal className="overflow-hidden rounded-[28px] bg-ink-850">
-              <Img src={i.image} alt="" sizes="(min-width: 1024px) 560px, 100vw" className="aspect-[4/3] w-full object-cover" />
+              <Img
+                src={i.image}
+                alt=""
+                sizes="(min-width: 1024px) 560px, 100vw"
+                className="aspect-[4/3] w-full object-cover"
+              />
             </Reveal>
           )}
         </div>
@@ -78,19 +115,31 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
       <section className="bg-ink-50 py-20">
         <div className="wrap flex flex-col gap-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <SplitHeading text="Relevant services" className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]" />
-            <Link href="/services" className="text-sm font-semibold text-teal-700 hover:underline">
+            <SplitHeading
+              text="Relevant services"
+              className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]"
+            />
+            <Link
+              href="/services"
+              className="text-sm font-semibold text-teal-700 hover:underline"
+            >
               All services →
             </Link>
           </div>
-          <ServiceCards ids={i.services} context={{ industry: i.slug, inquiry: "new-project" }} />
+          <ServiceCards
+            ids={i.services}
+            context={{ industry: i.slug, inquiry: "new-project" }}
+          />
         </div>
       </section>
 
       {sols.length > 0 && (
         <section className="bg-ink-900 py-20 text-white">
           <div className="wrap flex flex-col gap-8">
-            <SplitHeading text="Ready-to-deploy solutions" className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]" />
+            <SplitHeading
+              text="Ready-to-deploy solutions"
+              className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]"
+            />
             <RevealGroup className="grid gap-4 md:grid-cols-3">
               {sols.map((s) => (
                 <RevealItem key={s.slug}>
@@ -100,7 +149,9 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
                   >
                     <p className="kicker text-teal-500">Solution</p>
                     <strong className="text-xl">{s.name}</strong>
-                    <p className="text-sm leading-relaxed text-ink-200">{s.short}</p>
+                    <p className="text-sm leading-relaxed text-ink-200">
+                      {s.short}
+                    </p>
                     <span className="mt-auto pt-2 text-sm font-semibold text-teal-400 transition-transform group-hover:translate-x-1">
                       Explore →
                     </span>
@@ -114,7 +165,10 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
 
       <section className="bg-white py-20">
         <div className="wrap flex flex-col gap-8">
-          <SplitHeading text="Related case studies" className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]" />
+          <SplitHeading
+            text="Related case studies"
+            className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]"
+          />
           {cases.length > 0 ? (
             <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {cases.map((c) => (
@@ -126,7 +180,10 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
           ) : (
             <p className="rounded-[22px] bg-ink-50 p-8 text-ink-600">
               Case studies for {i.name.toLowerCase()} are on their way.{" "}
-              <Link href={cta} className="font-semibold text-teal-700 hover:underline">
+              <Link
+                href={cta}
+                className="font-semibold text-teal-700 hover:underline"
+              >
                 Ask us for a walkthrough of our work in this sector →
               </Link>
             </p>
@@ -138,8 +195,12 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
         <div className="wrap">
           <div className="flex flex-wrap items-center justify-between gap-6 rounded-[28px] bg-teal-500 p-8 text-ink-900 sm:p-10">
             <div className="flex flex-col gap-2">
-              <p className="text-[clamp(24px,3vw,30px)] font-extrabold tracking-[-0.02em]">Building for {i.name.toLowerCase()}?</p>
-              <p className="text-base text-ink-900/80">Tell us about it. We reply within one working day.</p>
+              <p className="text-[clamp(24px,3vw,30px)] font-extrabold tracking-[-0.02em]">
+                Building for {i.name.toLowerCase()}?
+              </p>
+              <p className="text-base text-ink-900/80">
+                Tell us about it. We reply within one working day.
+              </p>
             </div>
             <Button href={cta} variant="dark" arrow>
               Start the conversation

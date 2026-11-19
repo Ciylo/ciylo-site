@@ -2,7 +2,14 @@
 
 /* eslint-disable @next/next/no-img-element */
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import {
+  motion,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import { useRef } from "react";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Button } from "@/components/ui/Button";
 import { Marquee } from "@/components/ui/Marquee";
@@ -15,17 +22,27 @@ import { HeroMosaic } from "./HeroMosaic";
  */
 export function Hero({ video }: { video?: string }) {
   const reduce = useReducedMotionSafe();
+  const section = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: section,
+    offset: ["start start", "end start"],
+  });
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 140]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.12]);
   const mx = useMotionValue(50);
   const my = useMotionValue(30);
   const sx = useSpring(mx, { stiffness: 60, damping: 20 });
   const sy = useSpring(my, { stiffness: 60, damping: 20 });
   const glow = useTransform(
     [sx, sy],
-    ([x, y]) => `radial-gradient(640px circle at ${x}% ${y}%, rgb(0 201 167 / 0.16), transparent 60%)`,
+    ([x, y]) =>
+      `radial-gradient(640px circle at ${x}% ${y}%, rgb(0 201 167 / 0.16), transparent 60%)`,
   );
 
   return (
     <section
+      ref={section}
       className="relative isolate overflow-hidden bg-ink-900 pt-40 pb-14 text-white sm:pt-44"
       onPointerMove={(e) => {
         if (reduce) return;
@@ -35,7 +52,11 @@ export function Hero({ video }: { video?: string }) {
       }}
     >
       {/* Background footage / poster, heavily darkened for 4.5:1+ text contrast */}
-      <div aria-hidden className="absolute inset-0 -z-30">
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 -z-30"
+        style={reduce ? undefined : { scale: bgScale }}
+      >
         {video && !reduce ? (
           <video
             className="h-full w-full object-cover"
@@ -53,21 +74,36 @@ export function Hero({ video }: { video?: string }) {
         <div className="absolute inset-0 bg-ink-900/[0.78]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_38%,rgb(17_16_19/0.6),transparent_70%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink-900/40 via-transparent to-ink-900" />
-      </div>
-      <div aria-hidden className="grid-bg absolute inset-0 -z-20 [mask-image:radial-gradient(ellipse_at_50%_20%,#000_30%,transparent_75%)]" />
-      <motion.div aria-hidden className="absolute inset-0 -z-10" style={{ background: glow }} />
+      </motion.div>
+      <div
+        aria-hidden
+        className="grid-bg absolute inset-0 -z-20 [mask-image:radial-gradient(ellipse_at_50%_20%,#000_30%,transparent_75%)]"
+      />
+      <motion.div
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{ background: glow }}
+      />
       {/* scan line */}
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 animate-scan bg-gradient-to-b from-transparent via-teal-500/[0.07] to-transparent" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 animate-scan bg-gradient-to-b from-transparent via-teal-500/[0.07] to-transparent"
+      />
 
       <div className="wrap">
-        <div className="mx-auto flex max-w-[940px] flex-col items-center gap-6 text-center">
+        <motion.div
+          style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
+          className="mx-auto flex max-w-[940px] flex-col items-center gap-6 text-center"
+        >
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2.5 rounded-full border border-ink-600 bg-ink-850/70 py-1.5 pr-3.5 pl-1.5 text-[13px] text-ink-200 backdrop-blur"
           >
-            <span className="rounded-full bg-teal-500 px-2.5 py-0.5 text-xs font-bold text-ink-900">7+ yrs</span>
+            <span className="rounded-full bg-teal-500 px-2.5 py-0.5 text-xs font-bold text-ink-900">
+              7+ yrs
+            </span>
             Silicon to screen, under one roof in Lahore
           </motion.div>
 
@@ -77,6 +113,7 @@ export function Hero({ video }: { video?: string }) {
             delay={0.1}
             text="One team for the device, the data and the app."
             accent={["device", "data", "app"]}
+            accentClassName="text-shimmer"
             className="text-[clamp(40px,7vw,72px)] leading-[1.02] font-extrabold tracking-[-0.035em]"
           />
 
@@ -86,8 +123,9 @@ export function Hero({ video }: { video?: string }) {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="max-w-[640px] text-lg leading-relaxed text-pretty text-ink-200"
           >
-            Ciylo turns ambitious ideas into products people can hold and use: circuit boards, firmware, AI models and the
-            software on top, shipped together with no hand-offs.
+            Ciylo turns ambitious ideas into products people can hold and use:
+            circuit boards, firmware, AI models and the software on top, shipped
+            together with no hand-offs.
           </motion.p>
 
           <motion.div
@@ -116,19 +154,31 @@ export function Hero({ video }: { video?: string }) {
             <span className="relative flex h-9 w-5 justify-center rounded-full border border-ink-500 group-hover:border-teal-400">
               <motion.span
                 className="mt-1.5 block h-2 w-0.5 rounded-full bg-teal-500"
-                animate={reduce ? undefined : { y: [0, 12, 0], opacity: [1, 0.2, 1] }}
-                transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+                animate={
+                  reduce ? undefined : { y: [0, 12, 0], opacity: [1, 0.2, 1] }
+                }
+                transition={{
+                  duration: 1.8,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               />
             </span>
           </motion.a>
-        </div>
+        </motion.div>
 
         {/* Clients */}
         <div className="mt-16 flex flex-col items-center gap-5">
-          <p className="text-[13px] font-medium text-ink-300">Teams that trust us</p>
+          <p className="text-[13px] font-medium text-ink-300">
+            Teams that trust us
+          </p>
           <Marquee duration={36} className="w-full">
             {clients.map((c) => (
-              <div key={c.name} className="flex items-center gap-2.5 px-8 sm:px-11" title={c.name}>
+              <div
+                key={c.name}
+                className="flex items-center gap-2.5 px-8 sm:px-11"
+                title={c.name}
+              >
                 <img
                   src={c.logo}
                   alt={c.name}
@@ -138,7 +188,9 @@ export function Hero({ video }: { video?: string }) {
                   className="logo-mono-dark h-7 w-auto sm:h-8"
                 />
                 {"withName" in c && c.withName && (
-                  <span className="logo-mono-dark text-lg font-semibold text-ink-900">{c.name}</span>
+                  <span className="logo-mono-dark text-lg font-semibold text-ink-900">
+                    {c.name}
+                  </span>
                 )}
               </div>
             ))}

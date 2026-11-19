@@ -204,6 +204,76 @@
   }
 }
 
+/* Animated gradient text for hero accents */
+.text-shimmer {
+  background: linear-gradient(100deg, #00c9a7 0%, #57d9bf 30%, #a5f31e 50%, #00abbc 70%, #00c9a7 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer-text 7s ease-in-out infinite alternate;
+}
+@keyframes shimmer-text {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* Primary button light sweep */
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / 0.55) 50%, transparent 65%);
+  background-size: 250% 100%;
+  background-position: 130% 0;
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  transition: background-position 0.9s var(--ease-out-expo);
+  background-position: -30% 0;
+}
+
+/* 3D tilt cards (components/ui/Tilt) */
+.tilt {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease-out-expo);
+  will-change: transform;
+}
+.tilt[data-tilting="true"] {
+  transition: transform 0.12s linear;
+}
+.tilt .tilt-pop {
+  transform: translateZ(36px);
+}
+.tilt-glare {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(600px circle at var(--gx, 50%) var(--gy, 50%), rgb(255 255 255 / 0.16), transparent 45%);
+  mix-blend-mode: soft-light;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 5;
+}
+.tilt[data-tilting="true"] .tilt-glare {
+  opacity: 1;
+}
+@media (hover: none), (prefers-reduced-motion: reduce) {
+  .tilt {
+    transform: none !important;
+  }
+  .tilt-glare {
+    display: none;
+  }
+}
+
 /* Diagram link flow (thumbnails) */
 .thumb-flow {
   animation: thumb-flow 1.6s linear infinite;

@@ -80,7 +80,15 @@ const map: Record<IconName, LucideIcon> = {
   rocket: Rocket,
 };
 
-export function DiagramIcon({ name, className, size }: { name: IconName; className?: string; size?: number }) {
+export function DiagramIcon({
+  name,
+  className,
+  size,
+}: {
+  name: IconName;
+  className?: string;
+  size?: number;
+}) {
   const I = map[name];
   return <I className={className} size={size} strokeWidth={1.75} aria-hidden />;
 }

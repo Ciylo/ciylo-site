@@ -11,12 +11,19 @@ type V3 = [number, number, number];
 const toV = (lat: number, lng: number): V3 => {
   const la = lat * D2R;
   const ln = lng * D2R;
-  return [Math.cos(la) * Math.sin(ln), Math.sin(la), Math.cos(la) * Math.cos(ln)];
+  return [
+    Math.cos(la) * Math.sin(ln),
+    Math.sin(la),
+    Math.cos(la) * Math.cos(ln),
+  ];
 };
 
 /** Great-circle interpolation between two unit vectors */
 function slerp(a: V3, b: V3, t: number): V3 {
-  const dot = Math.min(1, Math.max(-1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]));
+  const dot = Math.min(
+    1,
+    Math.max(-1, a[0] * b[0] + a[1] * b[1] + a[2] * b[2]),
+  );
   const om = Math.acos(dot);
   if (om < 1e-4) return a;
   const s = Math.sin(om);
@@ -42,7 +49,9 @@ export function Globe({ className }: { className?: string }) {
     const ctx = cv.getContext("2d");
     if (!ctx) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     let pts: Float32Array | null = null;
     let raf = 0;
     let visible = false;
@@ -60,7 +69,10 @@ export function Globe({ className }: { className?: string }) {
     const ff = getComputedStyle(cv).fontFamily;
 
     const hq = toV(HQ.lat, HQ.lng);
-    const targets = clientCountries.map((c) => ({ name: c.name, v: toV(c.lat, c.lng) }));
+    const targets = clientCountries.map((c) => ({
+      name: c.name,
+      v: toV(c.lat, c.lng),
+    }));
     const arcs = targets.map((c, i) => {
       const N = 48;
       const dot = hq[0] * c.v[0] + hq[1] * c.v[1] + hq[2] * c.v[2];
@@ -114,7 +126,14 @@ export function Globe({ className }: { className?: string }) {
       ctx.arc(c, c, R * 1.25, 0, Math.PI * 2);
       ctx.fill();
       // Sphere body
-      const body = ctx.createRadialGradient(c - R * 0.35, c - R * 0.4, R * 0.1, c, c, R);
+      const body = ctx.createRadialGradient(
+        c - R * 0.35,
+        c - R * 0.4,
+        R * 0.1,
+        c,
+        c,
+        R,
+      );
       body.addColorStop(0, "#1e1d23");
       body.addColorStop(1, "#0b0a0d");
       ctx.fillStyle = body;
@@ -182,7 +201,9 @@ export function Globe({ className }: { className?: string }) {
       // Simple label collision avoidance: try above, below, right, left of the pin
       const placed: [number, number, number, number][] = [];
       const hit = (r: [number, number, number, number]) =>
-        placed.some((q) => r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1]);
+        placed.some(
+          (q) => r[0] < q[2] && r[2] > q[0] && r[1] < q[3] && r[3] > q[1],
+        );
       for (const t of targets) {
         const p = project(t.v, R, c);
         if (p.z <= 0) continue;
@@ -207,7 +228,12 @@ export function Globe({ className }: { className?: string }) {
             [p.x - g - w / 2, p.y + lh * 0.35],
           ];
           for (const [lx, ly] of spots) {
-            const r: [number, number, number, number] = [lx - w / 2 - 2, ly - lh, lx + w / 2 + 2, ly + 2];
+            const r: [number, number, number, number] = [
+              lx - w / 2 - 2,
+              ly - lh,
+              lx + w / 2 + 2,
+              ly + 2,
+            ];
             if (hit(r)) continue;
             placed.push(r);
             ctx.fillStyle = `rgba(255,255,255,${Math.min(1, p.z * 1.4).toFixed(2)})`;
@@ -315,13 +341,19 @@ export function Globe({ className }: { className?: string }) {
   return (
     <div ref={wrap} className={cn("relative aspect-square w-full", className)}>
       {!ready && (
-        <div aria-hidden className="absolute inset-[10%] animate-pulse rounded-full bg-gradient-to-br from-ink-800 to-ink-900 ring-1 ring-teal-500/20" />
+        <div
+          aria-hidden
+          className="absolute inset-[10%] animate-pulse rounded-full bg-gradient-to-br from-ink-800 to-ink-900 ring-1 ring-teal-500/20"
+        />
       )}
       <canvas
         ref={canvas}
         role="img"
         aria-label={`Globe showing Ciylo's Lahore headquarters connected to clients in ${clientCountries.map((c) => c.name).join(", ")}. Drag to rotate.`}
-        className={cn("relative cursor-grab touch-pan-y active:cursor-grabbing transition-opacity duration-700", ready ? "opacity-100" : "opacity-0")}
+        className={cn(
+          "relative cursor-grab touch-pan-y active:cursor-grabbing transition-opacity duration-700",
+          ready ? "opacity-100" : "opacity-0",
+        )}
       />
     </div>
   );
