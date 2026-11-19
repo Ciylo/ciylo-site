@@ -11,7 +11,7 @@ const blurbs: Record<string, string> = {
 
 export function SocialStrip() {
   return (
-    <RevealGroup className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+    <RevealGroup className="grid gap-3 sm:grid-cols-2">
       {site.socials.map((s) => (
         <RevealItem key={s.label}>
           <a

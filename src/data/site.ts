@@ -40,8 +40,6 @@ export const site = {
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/company/ciylo" },
     { label: "Instagram", href: "https://www.instagram.com/the_ciylo/" },
-    { label: "Facebook", href: "https://www.facebook.com/ciylotech" },
-    { label: "X", href: "https://x.com/ciylotech" },
   ],
 } as const;
 

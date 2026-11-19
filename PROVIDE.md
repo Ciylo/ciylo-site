@@ -10,7 +10,7 @@ _Last updated: 19 Nov 2026_
 - [ ] **Noraiz's headshot**: a professional photo, at least 1200 px tall. The current image is a casual outdoor shot (`public/images/leadership/noraiz.webp`).
 - [ ] **Confirm the open roles** on /careers are still open: Embedded Systems Engineer (1–3 yrs), Hardware Engineer / PCB Designer (2–3 yrs), SEO Expert (2–4 yrs). Add any new ones.
 - [ ] **Legal review of /privacy and /terms**: these are drafts. Fill in `[Date of legal review]` and `[jurisdiction to be confirmed]`.
-- [ ] **Socials**: LinkedIn (linkedin.com/company/ciylo) and Instagram (instagram.com/the_ciylo) are confirmed. Confirm facebook.com/ciylotech and x.com/ciylotech, or tell us to remove them. Add GitHub, Clutch, Behance or YouTube if you have them.
+- [ ] **More socials** (optional): LinkedIn and Instagram are live. Send Facebook, X, GitHub, Clutch, Behance or YouTube links if you open those accounts.
 
 ## 🟠 Content
 
