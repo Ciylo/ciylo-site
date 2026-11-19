@@ -1,7 +1,19 @@
+/** Accepts "example.com" or "https://example.com/" and returns "https://example.com". */
+function normaliseUrl(raw: string | undefined, fallback: string) {
+  const v = raw?.trim();
+  if (!v) return fallback;
+  const withProtocol = /^https?:\/\//i.test(v) ? v : `https://${v}`;
+  try {
+    return new URL(withProtocol).origin;
+  } catch {
+    return fallback;
+  }
+}
+
 export const site = {
   name: "Ciylo",
   legalName: "CIYLO (SMC-Private) Limited",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://theciylo.com",
+  url: normaliseUrl(process.env.NEXT_PUBLIC_SITE_URL, "https://theciylo.com"),
   tagline: "Hardware, firmware, AI and software, built by one team.",
   description:
     "Ciylo is a Lahore-based engineering studio that designs circuit boards, firmware, AI models and the web and mobile software on top, shipped together by one team.",
