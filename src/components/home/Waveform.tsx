@@ -23,7 +23,7 @@ function period(kind: WaveKind): string {
   }
 }
 
-/** Continuously scrolling oscilloscope trace. Draws itself in on first view. */
+/** Continuously scrolling oscilloscope trace. Currently unused (hero signal console removed on request); kept for reuse. */
 export function Waveform({ kind, delay = 0 }: { kind: WaveKind; delay?: number }) {
   const p = period(kind);
   // Two periods side by side so the loop is seamless

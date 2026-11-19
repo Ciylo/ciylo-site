@@ -123,11 +123,11 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
-            key={open}
-            initial={{ opacity: 0, y: -8, scale: 0.985 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -6, scale: 0.985 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            key="dropdown"
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.12, ease: "easeOut" }}
             className="absolute inset-x-0 top-full hidden px-6 pt-2 lg:block"
           >
             {open === "services" ? (
@@ -213,14 +213,11 @@ function ServicesMenu() {
               onFocus={() => setGroup(i)}
               onClick={() => setGroup(i)}
               className={cn(
-                "relative rounded-full px-4 py-2 text-sm transition-colors",
-                i === group ? "font-semibold text-white" : "font-medium text-ink-600 hover:text-ink-900",
+                "rounded-full px-4 py-2 text-sm",
+                i === group ? "bg-ink-900 font-semibold text-white" : "font-medium text-ink-600 hover:text-ink-900",
               )}
             >
-              {i === group && (
-                <motion.span layoutId="svc-tab" className="absolute inset-0 rounded-full bg-ink-900" transition={{ type: "spring", stiffness: 400, damping: 34 }} />
-              )}
-              <span className="relative">{sg.label}</span>
+              {sg.label}
             </button>
           ))}
         </div>
@@ -228,15 +225,7 @@ function ServicesMenu() {
       </div>
 
       <div className="grid grid-cols-[1fr_320px]">
-        <AnimatePresence mode="wait">
-          <motion.ul
-            key={g.id}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.18 }}
-            className="grid content-start gap-1 p-3 sm:grid-cols-2"
-          >
+        <ul className="grid content-start gap-1 p-3 sm:grid-cols-2">
             {list.map((s) => (
               <li key={s.id}>
                 <Link
@@ -244,7 +233,7 @@ function ServicesMenu() {
                   onMouseEnter={() => setHover(s)}
                   onFocus={() => setHover(s)}
                   className={cn(
-                    "group flex items-center justify-between gap-3 rounded-2xl px-4 py-3 transition-colors",
+                    "group flex items-center justify-between gap-3 rounded-2xl px-4 py-3",
                     preview.id === s.id ? "bg-teal-50" : "hover:bg-ink-50",
                   )}
                 >
@@ -252,25 +241,16 @@ function ServicesMenu() {
                     <span className="text-[15px] font-semibold text-ink-900">{s.name}</span>
                     <span className="font-mono text-[11px] text-ink-500">{s.tags.slice(0, 3).join(" · ")}</span>
                   </span>
-                  <span className={cn("text-teal-700 transition-opacity", preview.id === s.id ? "opacity-100" : "opacity-0")} aria-hidden>
+                  <span className={cn("text-teal-700", preview.id === s.id ? "opacity-100" : "opacity-0")} aria-hidden>
                     →
                   </span>
                 </Link>
               </li>
             ))}
-          </motion.ul>
-        </AnimatePresence>
+        </ul>
 
-        <div className="grid-bg relative flex flex-col gap-4 bg-ink-900 p-6 text-white" aria-live="polite">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={preview.id}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.2 }}
-              className="flex flex-1 flex-col gap-3"
-            >
+        <div className="grid-bg relative flex flex-col gap-4 bg-ink-900 p-6 text-white">
+          <div className="flex flex-1 flex-col gap-3">
               <p className="kicker text-teal-500">{g.label}</p>
               <p className="text-xl leading-snug font-bold">{preview.name}</p>
               <p className="text-sm leading-relaxed text-ink-200">{preview.short}</p>
@@ -285,8 +265,7 @@ function ServicesMenu() {
               >
                 View {preview.name.split(" ")[0]} →
               </Link>
-            </motion.div>
-          </AnimatePresence>
+          </div>
         </div>
       </div>
 

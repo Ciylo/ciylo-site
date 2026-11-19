@@ -75,16 +75,16 @@ export function ServicesBento() {
                   <Spotlight
                     className={cn(
                       "h-full rounded-[22px] transition-transform duration-500 hover:-translate-y-1",
-                      hero ? "bg-teal-500 text-ink-900" : dark ? "bg-ink-850 text-white" : "bg-ink-75 text-ink-900",
+                      hero ? "bg-teal-500 text-ink-900" : dark ? "bg-teal-50 text-ink-900 ring-1 ring-teal-100" : "bg-ink-75 text-ink-900",
                     )}
-                    color={hero ? "rgb(255 255 255 / 0.35)" : dark ? "rgb(0 201 167 / 0.22)" : "rgb(0 201 167 / 0.16)"}
+                    color={hero ? "rgb(255 255 255 / 0.35)" : dark ? "rgb(0 201 167 / 0.2)" : "rgb(0 201 167 / 0.16)"}
                   >
                     <Link href={`/services#${s.id}`} className={cn("flex h-full min-h-[260px] flex-col gap-3.5 p-[26px]", hero && "sm:p-10")}>
                       <span className="flex items-center justify-between">
                         <span
                           className={cn(
                             "kicker",
-                            hero ? "text-ink-900/70" : dark ? "text-teal-500" : "text-teal-700",
+                            hero ? "text-ink-900/70" : dark ? "text-teal-800" : "text-teal-700",
                           )}
                         >
                           {hero ? "End-to-end" : s.group} · {String(n).padStart(2, "0")}
@@ -105,7 +105,7 @@ export function ServicesBento() {
                       <span
                         className={cn(
                           "text-sm leading-relaxed",
-                          hero ? "max-w-[520px] text-ink-900/80" : dark ? "text-ink-200" : "text-ink-600",
+                          hero ? "max-w-[520px] text-ink-900/80" : dark ? "text-ink-600" : "text-ink-600",
                         )}
                       >
                         {s.short}
@@ -114,7 +114,7 @@ export function ServicesBento() {
                         <span
                           className={cn(
                             "font-mono text-xs",
-                            hero ? "text-ink-900/70" : dark ? "text-ink-300" : "text-ink-500",
+                            hero ? "text-ink-900/70" : dark ? "text-ink-500" : "text-ink-500",
                           )}
                         >
                           {s.tags.join(" · ")}
@@ -123,7 +123,7 @@ export function ServicesBento() {
                           <span
                             className={cn(
                               "rounded-full px-2.5 py-1 text-[11px] font-semibold",
-                              hero ? "bg-ink-900 text-teal-400" : dark ? "bg-ink-700 text-teal-400" : "bg-white text-teal-800",
+                              hero ? "bg-ink-900 text-teal-400" : dark ? "bg-white text-teal-800" : "bg-white text-teal-800",
                             )}
                           >
                             {s.work.length} case {s.work.length === 1 ? "study" : "studies"}

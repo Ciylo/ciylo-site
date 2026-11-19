@@ -7,14 +7,6 @@ import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Button } from "@/components/ui/Button";
 import { Marquee } from "@/components/ui/Marquee";
 import { clients } from "@/data/site";
-import { Waveform, type WaveKind } from "./Waveform";
-
-const channels: { label: string; kind: WaveKind; title: string; desc: string }[] = [
-  { label: "CH1 · SENSE", kind: "ecg", title: "Sensors & PCBs", desc: "ECG, PPG, IMU and industrial inputs on boards we design." },
-  { label: "CH2 · COMPUTE", kind: "square", title: "Firmware & Edge AI", desc: "RTOS firmware and models that run on the chip." },
-  { label: "CH3 · CONNECT", kind: "sine", title: "IoT & Cloud", desc: "BLE, LoRa and MQTT into scalable cloud pipelines." },
-  { label: "CH4 · DELIVER", kind: "growth", title: "Web, Mobile & SaaS", desc: "Apps and dashboards your users actually love." },
-];
 
 /**
  * Home hero. Drop footage at public/video/hero.mp4 (muted, looping lab/bench work)
@@ -129,36 +121,8 @@ export function Hero({ video }: { video?: string }) {
           </motion.a>
         </div>
 
-        {/* Signal console */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-16 overflow-hidden rounded-[28px] border border-ink-700 bg-ink-850/90 shadow-[0_40px_120px_-40px_rgb(0_201_167/0.35)] backdrop-blur"
-        >
-          <div className="flex items-center justify-between border-b border-ink-700 px-6 py-3 font-mono text-[11px] text-ink-300">
-            <span className="flex items-center gap-2">
-              <span className="size-1.5 animate-pulse-dot rounded-full bg-teal-500" /> LIVE · CIYLO SIGNAL CHAIN
-            </span>
-            <span className="hidden sm:inline">sensor → chip → cloud → screen</span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-            {channels.map((c, i) => (
-              <div
-                key={c.label}
-                className="group flex flex-col gap-3.5 border-ink-700 p-6 transition-colors hover:bg-ink-800/60 [&:not(:last-child)]:border-b sm:[&:nth-child(odd)]:border-r lg:border-b-0 lg:[&:not(:last-child)]:border-r"
-              >
-                <p className="kicker text-teal-500">{c.label}</p>
-                <Waveform kind={c.kind} delay={1 + i * 0.15} />
-                <p className="text-[15px] font-semibold">{c.title}</p>
-                <p className="text-[13px] leading-normal text-ink-300">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
         {/* Clients */}
-        <div className="mt-12 flex flex-col items-center gap-5">
+        <div className="mt-16 flex flex-col items-center gap-5">
           <p className="text-[13px] font-medium text-ink-300">Teams that trust us</p>
           <Marquee duration={36} className="w-full">
             {clients.map((c) => (
