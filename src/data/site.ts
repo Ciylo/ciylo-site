@@ -44,6 +44,7 @@ export const site = {
 } as const;
 
 export const clients = [
+  { name: "ChipMango", logo: "/clients/chipmango.png", w: 559, h: 96 },
   { name: "Tuqqi", logo: "/clients/tuqqi.svg", w: 97, h: 36 },
   { name: "FleetNurse", logo: "/clients/fleet-nurse.svg", w: 114, h: 40 },
   { name: "Pocket Dentist", logo: "/clients/pocket-dentist.svg", w: 90, h: 48 },

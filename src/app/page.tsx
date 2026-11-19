@@ -5,6 +5,7 @@ import { Lab } from "@/components/home/Lab";
 import { Process } from "@/components/home/Process";
 import { SelectedWork } from "@/components/home/SelectedWork";
 import { WhyCiylo } from "@/components/home/WhyCiylo";
+import { Testimonials } from "@/components/home/Testimonials";
 import { CiylotronsTeaser } from "@/components/home/CiylotronsTeaser";
 import { Industries } from "@/components/home/Industries";
 import { ContactSection } from "@/components/home/ContactSection";
@@ -24,6 +25,7 @@ export default function Home() {
       <Lab />
       <Process />
       <SelectedWork />
+      <Testimonials />
       <WhyCiylo />
       <CiylotronsTeaser />
       <Industries />

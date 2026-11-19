@@ -16,9 +16,7 @@ _Last updated: 19 Nov 2026_
 
 - [ ] **Hardware / embedded case studies**: there are currently none, so all hardware services show "Case studies coming soon". Even 2–3 (wearable, IoT/remote monitoring, kiosk, PCB) would help a lot. For each: client (or anonymised), problem, what we built, outcome, metrics and 4–8 photos or renders.
 - [ ] **Metrics for existing case studies**: real numbers such as active users, uptime or time saved. Only I-Hospice has stats today, and nothing is invented.
-- [ ] **Client permission**: confirm each of the 10 case studies (Callcom, Fireside Pharmacy, AI Medik, I-Hospice, VeritEd, Mirra, SplitMart, Keyper, Tarea, I-Health) and each client logo (Tuqqi, FleetNurse, Pocket Dentist, Stella Dental, neurogazer, skroote, Investment Evolution) may be shown publicly.
-- [ ] **Testimonials**: 3–6 real quotes with name, role, company and a photo or logo. The old site's testimonials were placeholders and were removed.
-- [ ] **Roles for two Ciylotrons**: Abubakar Ahmed and Raheel Niaz show "Ciylotron" because their job titles weren't in the Figma posts.
+- [ ] **Real testimonials**: the home page shows 3 PLACEHOLDER quotes (Ola, ChipMango; Chiddi, SplitMart; Jovan, MedSynq) with silhouette avatars. Send the approved quote, full name, role and a headshot for each, and confirm the spelling of MedSynq. Edit src/data/testimonials.ts.
 - [ ] **The rest of the team**: the site features 21 of 35 Ciylotrons. Send names, roles and portraits for the other 14.
 - [ ] **Achievements and representation**: competitions, conferences, awards and talks where Ciylotrons represented Ciylo or Pakistan. The copy mentions this, and specifics would make it much stronger.
 - [ ] **Solution timelines**: typical durations for each phase of the three solutions (Survey → Pilot → Rollout → Operate, and so on). They are shown without durations for now.
@@ -53,5 +51,6 @@ Also useful:
 - Website mockup HTML
 - Office photos
 - Partnerships: 2 US partner companies (technical support)
+- Client permission for all 10 case studies and all client logos (incl. ChipMango)
 - Confirmed facts: 7+ years, 300+ products, 80+ clients, 20+ industries, 35-person team, clients in USA, UK, Germany, France, Malta, Nigeria, KSA and UAE
 - Contact: noraiz@ciylo.com, +92 301 6475925, 9-A Aitchison Society, Lahore 53700
