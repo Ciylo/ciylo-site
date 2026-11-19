@@ -19,7 +19,7 @@ _Last updated: 19 Nov 2026_
 - [ ] **Client permission**: confirm each of the 10 case studies (Callcom, Fireside Pharmacy, AI Medik, I-Hospice, VeritEd, Mirra, SplitMart, Keyper, Tarea, I-Health) and each client logo (Tuqqi, FleetNurse, Pocket Dentist, Stella Dental, neurogazer, skroote, Investment Evolution) may be shown publicly.
 - [ ] **Testimonials**: 3–6 real quotes with name, role, company and a photo or logo. The old site's testimonials were placeholders and were removed.
 - [ ] **Roles for two Ciylotrons**: Abubakar Ahmed and Raheel Niaz show "Ciylotron" because their job titles weren't in the Figma posts.
-- [ ] **The rest of the team**: the site features 22 of 35 Ciylotrons. Send names, roles and portraits for the other 13.
+- [ ] **The rest of the team**: the site features 21 of 35 Ciylotrons. Send names, roles and portraits for the other 14.
 - [ ] **Achievements and representation**: competitions, conferences, awards and talks where Ciylotrons represented Ciylo or Pakistan. The copy mentions this, and specifics would make it much stronger.
 - [ ] **Solution timelines**: typical durations for each phase of the three solutions (Survey → Pilot → Rollout → Operate, and so on). They are shown without durations for now.
 - [ ] **Engagement table**: typical lengths for Prototype / PoC, Dedicated team and Full project delivery, if you want them shown.
@@ -28,7 +28,7 @@ _Last updated: 19 Nov 2026_
 ## 🟡 Images (higher resolution wanted)
 
 These portraits are under 450 px and look soft on large screens:
-- [ ] Hamza Tanveer (400 px with background; a larger background-removed portrait would match the rest), Danish, Abuzar, Zaid Tahir, Mohsin Khan, Raheel Niaz, Huzaifa, Taimoor Hassan
+- [ ] Hamza Tanveer and Muhammad Kaif (400 px originals), Danish, Abuzar, Zaid Tahir, Mohsin Khan, Raheel Niaz, Huzaifa, Taimoor Hassan
 
 Also useful:
 - [ ] More **lab and project photos**: PCBs, prototypes, devices in the field, kiosks, robots.

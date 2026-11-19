@@ -20,8 +20,6 @@ export const inquiryTypes = [
   { id: "other", label: "Other" },
 ] as const;
 
-const needs = ["Hardware / PCB", "Firmware", "Wearable", "AI / Edge AI", "App or SaaS", "E-commerce", "ERP / CRM", "Kiosk", "Full product / MVP", "Not sure yet"];
-
 type Defaults = ContactDefaults;
 
 function FormInner({ defaults }: { defaults: Defaults }) {
@@ -30,7 +28,6 @@ function FormInner({ defaults }: { defaults: Defaults }) {
     defaults.inquiry ?? (defaults.service && advisoryIds.includes(defaults.service) ? "advisory" : "new-project");
   const [inquiry, setInquiry] = useState<string>(initialInquiry);
   const [service, setService] = useState<string>(defaults.service ?? defaults.solution ?? "");
-  const [picked, setPicked] = useState<string[]>([]);
   const [sent, setSent] = useState(false);
   const [country, setCountry] = useState<CountryCode>("PK");
   const [phoneError, setPhoneError] = useState("");
@@ -38,7 +35,6 @@ function FormInner({ defaults }: { defaults: Defaults }) {
   const selected = [...countries.priority, ...countries.rest].find((x) => x.code === country)!;
   const industry = industryPages.find((i) => i.slug === defaults.industry);
 
-  const toggle = (n: string) => setPicked((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
   const serviceName =
     services.find((s) => s.id === service)?.name ?? solutions.find((s) => s.slug === service)?.name ?? "";
 
@@ -63,7 +59,6 @@ function FormInner({ defaults }: { defaults: Defaults }) {
       `Email: ${f.get("email")}`,
       `Phone: ${parsed.formatInternational()} (${selected.name})`,
       f.get("company") ? `Company: ${f.get("company")}` : null,
-      picked.length ? `Help with: ${picked.join(", ")}` : null,
       "",
       String(f.get("message") ?? ""),
     ]
@@ -125,32 +120,6 @@ function FormInner({ defaults }: { defaults: Defaults }) {
         </p>
       )}
 
-      {inquiry === "new-project" && (
-        <fieldset className="flex flex-col gap-3">
-          <legend className="mb-3 text-sm font-semibold">I need help with</legend>
-          <div className="flex flex-wrap gap-2">
-            {needs.map((n) => {
-              const on = picked.includes(n);
-              return (
-                <button
-                  key={n}
-                  type="button"
-                  aria-pressed={on}
-                  onClick={() => toggle(n)}
-                  className={cn(
-                    "rounded-full border px-4 py-2 text-sm transition-all duration-200 active:scale-95",
-                    on ? "border-ink-900 bg-ink-900 text-white" : "border-ink-200 bg-white text-ink-900 hover:border-ink-900",
-                  )}
-                >
-                  {on && <span className="mr-1.5 text-teal-400">✓</span>}
-                  {n}
-                </button>
-              );
-            })}
-          </div>
-        </fieldset>
-      )}
-
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="flex flex-col gap-1.5 text-sm font-semibold">
           Name *
@@ -164,7 +133,7 @@ function FormInner({ defaults }: { defaults: Defaults }) {
           <label htmlFor="phone">Phone *</label>
           <div className="flex gap-2">
             {/* Compact flag + dial code display; the real <select> sits invisibly on top */}
-            <div className="relative flex w-[112px] shrink-0 items-center gap-1.5 rounded-xl border border-ink-200 bg-white px-3 text-[15px] font-normal focus-within:border-teal-600 focus-within:ring-4 focus-within:ring-teal-500/15">
+            <div className="relative flex w-[112px] shrink-0 items-center gap-1.5 overflow-hidden rounded-xl border border-ink-200 bg-white px-3 text-[15px] font-normal focus-within:border-teal-600 focus-within:ring-4 focus-within:ring-teal-500/15">
               <span aria-hidden className="text-lg leading-none">{selected.flag}</span>
               <span aria-hidden className="tabular-nums">{selected.dial}</span>
               <span aria-hidden className="ml-auto text-xs text-ink-400">▾</span>
@@ -176,7 +145,7 @@ function FormInner({ defaults }: { defaults: Defaults }) {
                   setCountry(e.target.value as CountryCode);
                   setPhoneError("");
                 }}
-                className="absolute inset-0 cursor-pointer opacity-0"
+                className="absolute inset-0 h-full w-full cursor-pointer appearance-none opacity-0"
               >
                 <optgroup label="Suggested">
                   {countries.priority.map((o) => (
