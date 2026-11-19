@@ -30,7 +30,7 @@ function LocalTime({ tz }: { tz: string }) {
 /** Office cards with live local time. Placeholder slots render dashed. */
 export function Offices() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <div className={cn("grid gap-4", offices.length > 1 ? "sm:grid-cols-2" : "max-w-[560px]")}>
       {offices.map((o) => {
         const placeholder = "placeholder" in o && o.placeholder;
         return (

@@ -22,6 +22,10 @@ export type Ciylotron = {
   discipline: Discipline;
   /** Recognition from Ciylo's performer / employee of the month posts */
   honours?: string[];
+  /** "cutout" (default): background removed, sits on the gradient. "photo": regular photo, fills the card. */
+  portrait?: "cutout" | "photo";
+  /** Image file name in /public/images/team (without .webp) when it differs from the slug */
+  image?: string;
 };
 
 export const leadership: Leader[] = [
@@ -48,16 +52,16 @@ export const ciylotrons: Ciylotron[] = [
   { slug: "hassan-ijaz", name: "Hassan Ijaz", role: "Embedded Systems Engineer", discipline: "Hardware", honours: ["Performer of the Month · Sep"] },
   { slug: "suleman-zafar", name: "Suleman Zafar", role: "PCB Engineer", discipline: "Hardware" },
   { slug: "taimoor-hassan", name: "Taimoor Hassan", role: "Hardware Design Engineer", discipline: "Hardware" },
-  { slug: "muhammad-kaif", name: "Muhammad Kaif", role: "Embedded Systems Engineer", discipline: "Hardware" },
+  { slug: "muhammad-kaif", name: "Muhammad Kaif", role: "Embedded Systems Engineer", discipline: "Hardware", portrait: "photo", image: "muhammad-kaif-2026" },
   { slug: "asif-shahzad", name: "Asif Shahzad", role: "AI Engineer", discipline: "AI", honours: ["Performer of the Month · Aug"] },
   { slug: "muhammad-faizan", name: "Muhammad Faizan", role: "AI Engineer", discipline: "AI", honours: ["Performer of the Month · Aug"] },
   { slug: "asad-khalid", name: "Asad Khalid", role: "AI Developer", discipline: "AI", honours: ["Performer of the Month · Jun 2026"] },
+  { slug: "hamza-tanveer", name: "Hamza Tanveer", role: "Software Team Lead", discipline: "Software", portrait: "photo" },
   { slug: "muhammad-abdullah", name: "Muhammad Abdullah", role: "Full Stack Developer", discipline: "Software", honours: ["Performer of the Month · Oct", "Employee of the Month · Mar 2025"] },
   { slug: "huzaifa", name: "Huzaifa", role: "React Native Developer", discipline: "Software", honours: ["Performer of the Month · Jul", "Employee of the Month · Oct 2025"] },
   { slug: "ashir-mehmood", name: "Ashir Mehmood", role: "Web Developer", discipline: "Software", honours: ["Performer of the Month · Sep", "Employee of the Month · Feb 2025"] },
   { slug: "zaid-tahir", name: "Zaid Tahir", role: "MERN Stack Developer", discipline: "Software", honours: ["Employee of the Month · Dec 2025"] },
   { slug: "mohsin-khan", name: "Mohsin Khan", role: "Software Engineer", discipline: "Software", honours: ["Employee of the Month · Jan 2026"] },
-  { slug: "usama", name: "Usama", role: "MERN Stack Developer", discipline: "Software" },
   { slug: "muhammad-ahmad", name: "Muhammad Ahmad", role: "MERN Stack Developer", discipline: "Software" },
   { slug: "abubakar-ahmed", name: "Abubakar Ahmed", role: "Ciylotron", discipline: "Software", honours: ["Performer of the Month · Apr 2025"] },
   { slug: "raheel-niaz", name: "Raheel Niaz", role: "Ciylotron", discipline: "Software", honours: ["Performer of the Month · Apr 2025"] },

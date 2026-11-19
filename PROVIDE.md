@@ -6,13 +6,11 @@ _Last updated: 19 Nov 2026_
 
 ## 🔴 High priority (visible on the site now)
 
-- [ ] **Partner / accelerator / grant backing**: the 4th proof point in "Why Ciylo" is `[Partner / accelerator / grant backing]`. Edit `proofPoints` in `src/data/site.ts`.
-- [ ] **Second office**: an address, phone and city if there is one. The Offices card on /contact shows `[Office city]` until then (`offices` in `src/data/site.ts`). Delete the placeholder entry if there is no second office.
 - [ ] **Hero video**: a 10–20 s muted loop of real lab and bench work (soldering, probing boards, devices running). 1920×1080, H.264 MP4, under 8 MB. Save it as `public/video/hero.mp4` and it plays automatically.
 - [ ] **Noraiz's headshot**: a professional photo, at least 1200 px tall. The current image is a casual outdoor shot (`public/images/leadership/noraiz.webp`).
 - [ ] **Confirm the open roles** on /careers are still open: Embedded Systems Engineer (1–3 yrs), Hardware Engineer / PCB Designer (2–3 yrs), SEO Expert (2–4 yrs). Add any new ones.
 - [ ] **Legal review of /privacy and /terms**: these are drafts. Fill in `[Date of legal review]` and `[jurisdiction to be confirmed]`.
-- [ ] **Socials**: confirm these URLs are correct: linkedin.com/company/ciylotech, instagram.com/ciylotech, facebook.com/ciylotech, x.com/ciylotech. Add GitHub, Clutch, Behance or YouTube if you have them.
+- [ ] **Socials**: LinkedIn (linkedin.com/company/ciylo) and Instagram (instagram.com/the_ciylo) are confirmed. Confirm facebook.com/ciylotech and x.com/ciylotech, or tell us to remove them. Add GitHub, Clutch, Behance or YouTube if you have them.
 
 ## 🟠 Content
 
@@ -30,7 +28,7 @@ _Last updated: 19 Nov 2026_
 ## 🟡 Images (higher resolution wanted)
 
 These portraits are under 450 px and look soft on large screens:
-- [ ] Usama, Danish, Abuzar, Zaid Tahir, Mohsin Khan, Raheel Niaz, Huzaifa, Taimoor Hassan
+- [ ] Hamza Tanveer (400 px with background; a larger background-removed portrait would match the rest), Danish, Abuzar, Zaid Tahir, Mohsin Khan, Raheel Niaz, Huzaifa, Taimoor Hassan
 
 Also useful:
 - [ ] More **lab and project photos**: PCBs, prototypes, devices in the field, kiosks, robots.
@@ -54,5 +52,6 @@ Also useful:
 - Branding Figma (logo, colours, posters, case-study decks)
 - Website mockup HTML
 - Office photos
+- Partnerships: 2 US partner companies (technical support)
 - Confirmed facts: 7+ years, 300+ products, 80+ clients, 20+ industries, 35-person team, clients in USA, UK, Germany, France, Malta, Nigeria, KSA and UAE
 - Contact: noraiz@ciylo.com, +92 301 6475925, 9-A Aitchison Society, Lahore 53700

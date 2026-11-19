@@ -34,12 +34,12 @@ export const studio = [
   { src: o("corridor"), caption: "Opening week, balloons included", wide: true },
 ];
 
+/** Lab grid: one photo per person (columns take items 0,2,4 and 1,3). */
 export const labShots = [
-  { src: lab("bench-2"), caption: "PCB bring-up on the ESD bench" },
+  { src: o("hassan-desk"), caption: "Embedded workstation" },
   { src: lab("embedded-desk"), caption: "Firmware meets hardware" },
   { src: lab("pcb-probe"), caption: "Probing a fresh board" },
-  { src: lab("soldering"), caption: "Rework and soldering" },
-  { src: o("hassan-desk"), caption: "Embedded workstation" },
+  { src: lab("soldering"), caption: "PCB rework on the ESD bench" },
   { src: o("kaif-desk"), caption: "Simulation and layout" },
 ];
 

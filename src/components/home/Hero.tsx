@@ -7,10 +7,11 @@ import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Button } from "@/components/ui/Button";
 import { Marquee } from "@/components/ui/Marquee";
 import { clients } from "@/data/site";
+import { HeroMosaic } from "./HeroMosaic";
 
 /**
  * Home hero. Drop footage at public/video/hero.mp4 (muted, looping lab/bench work)
- * and it plays behind the hero automatically; until then the poster image shows.
+ * and it plays behind the hero automatically; until then a mosaic of Ciylotrons at work shows.
  */
 export function Hero({ video }: { video?: string }) {
   const reduce = useReducedMotionSafe();
@@ -47,9 +48,10 @@ export function Hero({ video }: { video?: string }) {
             preload="metadata"
           />
         ) : (
-          <img src="/images/lab/bench-wide.webp" alt="" className="h-full w-full object-cover object-[50%_30%]" />
+          <HeroMosaic />
         )}
-        <div className="absolute inset-0 bg-ink-900/[0.88]" />
+        <div className="absolute inset-0 bg-ink-900/[0.78]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_38%,rgb(17_16_19/0.6),transparent_70%)]" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink-900/40 via-transparent to-ink-900" />
       </div>
       <div aria-hidden className="grid-bg absolute inset-0 -z-20 [mask-image:radial-gradient(ellipse_at_50%_20%,#000_30%,transparent_75%)]" />

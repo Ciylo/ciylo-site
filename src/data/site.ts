@@ -38,8 +38,8 @@ export const site = {
     { value: 20, suffix: "+", label: "Industries" },
   ],
   socials: [
-    { label: "LinkedIn", href: "https://www.linkedin.com/company/ciylotech" },
-    { label: "Instagram", href: "https://www.instagram.com/ciylotech" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/ciylo" },
+    { label: "Instagram", href: "https://www.instagram.com/the_ciylo/" },
     { label: "Facebook", href: "https://www.facebook.com/ciylotech" },
     { label: "X", href: "https://x.com/ciylotech" },
   ],
@@ -67,7 +67,7 @@ export const clientCountries = [
   { name: "UAE", code: "AE", lat: 24.45, lng: 54.38 },
 ] as const;
 
-/** Offices. Only Lahore is confirmed; the placeholder slot stays until an address is supplied. */
+/** Offices. Lahore only for now; add more entries here as they open. */
 export const offices = [
   {
     city: "Lahore",
@@ -78,15 +78,14 @@ export const offices = [
     timezone: "Asia/Karachi",
     hq: true,
   },
-  { city: "[Office city]", country: "[Country]", address: "[Office address to be supplied]", phone: "[Phone]", phoneHref: "", timezone: "", hq: false, placeholder: true },
 ] as const;
 
-/** Proof points shown in Why Ciylo. The last one is a placeholder until the owner supplies it. */
+/** Proof points shown in Why Ciylo. */
 export const proofPoints = [
   { value: "HW + SW", label: "Hardware + software under one roof" },
   { value: "35", label: "Person team of Ciylotrons" },
   { value: "8", label: "Countries with Ciylo clients" },
-  { value: "[ ]", label: "[Partner / accelerator / grant backing]", placeholder: true },
+  { value: "2", label: "US partner companies for technical support" },
 ] as const;
 
 export type NavLink = { label: string; href: string; description?: string };

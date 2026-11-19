@@ -57,6 +57,25 @@
   --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
   --animate-scan: scan 6s var(--ease-out-expo) infinite;
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+  --animate-kenburns: kenburns 22s ease-in-out infinite alternate;
+  --animate-kenburns-rev: kenburns-rev 26s ease-in-out infinite alternate;
+
+  @keyframes kenburns {
+    from {
+      transform: scale(1.02) translate3d(0, 0, 0);
+    }
+    to {
+      transform: scale(1.12) translate3d(-2%, -1.5%, 0);
+    }
+  }
+  @keyframes kenburns-rev {
+    from {
+      transform: scale(1.12) translate3d(1.5%, 1%, 0);
+    }
+    to {
+      transform: scale(1.02) translate3d(0, 0, 0);
+    }
+  }
 
   @keyframes marquee {
     from {

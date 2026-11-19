@@ -26,10 +26,15 @@ export function CiylotronCard({ p, className, compact }: { p: Ciylotron; classNa
           }}
         />
         <Img
-          src={`/images/team/${p.slug}.webp`}
+          src={`/images/team/${p.image ?? p.slug}.webp`}
           alt={`${p.name}, ${p.role} at Ciylo`}
           sizes={compact ? "220px" : "(min-width: 1024px) 280px, (min-width: 640px) 33vw, 50vw"}
-          className="absolute inset-x-0 bottom-0 mx-auto h-[92%] w-auto max-w-none object-contain object-bottom transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
+          className={cn(
+            "absolute transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]",
+            p.portrait === "photo"
+              ? "inset-0 h-full w-full object-cover object-top"
+              : "inset-x-0 bottom-0 mx-auto h-[92%] w-auto max-w-none object-contain object-bottom",
+          )}
         />
         <span className="absolute top-3 left-3 rounded-full bg-white/80 px-2.5 py-1 font-mono text-[10px] tracking-wide text-ink-900 uppercase backdrop-blur">
           {p.discipline}

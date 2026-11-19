@@ -9,6 +9,8 @@ import { solutions } from "@/data/solutions";
 import { industryPages } from "@/data/industries";
 import { cn } from "@/lib/cn";
 import type { ContactDefaults } from "@/lib/contact";
+import { countryOptions } from "@/lib/countries";
+import { parsePhoneNumberFromString, type CountryCode } from "libphonenumber-js/min";
 
 export const inquiryTypes = [
   { id: "new-project", label: "New project" },
@@ -17,19 +19,6 @@ export const inquiryTypes = [
   { id: "partnership", label: "Partnership" },
   { id: "other", label: "Other" },
 ] as const;
-
-const countryCodes = [
-  { code: "+92", label: "🇵🇰 +92" },
-  { code: "+1", label: "🇺🇸 +1" },
-  { code: "+44", label: "🇬🇧 +44" },
-  { code: "+49", label: "🇩🇪 +49" },
-  { code: "+33", label: "🇫🇷 +33" },
-  { code: "+356", label: "🇲🇹 +356" },
-  { code: "+234", label: "🇳🇬 +234" },
-  { code: "+966", label: "🇸🇦 +966" },
-  { code: "+971", label: "🇦🇪 +971" },
-  { code: "other", label: "Other" },
-];
 
 const needs = ["Hardware / PCB", "Firmware", "Wearable", "AI / Edge AI", "App or SaaS", "E-commerce", "ERP / CRM", "Kiosk", "Full product / MVP", "Not sure yet"];
 
@@ -43,6 +32,10 @@ function FormInner({ defaults }: { defaults: Defaults }) {
   const [service, setService] = useState<string>(defaults.service ?? defaults.solution ?? "");
   const [picked, setPicked] = useState<string[]>([]);
   const [sent, setSent] = useState(false);
+  const [country, setCountry] = useState<CountryCode>("PK");
+  const [phoneError, setPhoneError] = useState("");
+  const countries = countryOptions();
+  const selected = [...countries.priority, ...countries.rest].find((x) => x.code === country)!;
   const industry = industryPages.find((i) => i.slug === defaults.industry);
 
   const toggle = (n: string) => setPicked((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
@@ -52,6 +45,13 @@ function FormInner({ defaults }: { defaults: Defaults }) {
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
+    const parsed = parsePhoneNumberFromString(String(f.get("phone") ?? ""), country);
+    if (!parsed || !parsed.isValid()) {
+      setPhoneError(`That doesn’t look like a valid ${selected.name} number.`);
+      e.currentTarget.querySelector<HTMLInputElement>("#phone")?.focus();
+      return;
+    }
+    setPhoneError("");
     const name = String(f.get("name") ?? "").trim();
     const inquiryLabel = inquiryTypes.find((i) => i.id === inquiry)?.label ?? inquiry;
     const subject = `[${inquiryLabel}] ${serviceName ? `${serviceName} · ` : ""}${name || "Website enquiry"}`;
@@ -61,7 +61,7 @@ function FormInner({ defaults }: { defaults: Defaults }) {
       industry ? `Industry: ${industry.name}` : null,
       `Name: ${name}`,
       `Email: ${f.get("email")}`,
-      `Phone: ${f.get("cc") === "other" ? "" : f.get("cc")} ${f.get("phone")}`,
+      `Phone: ${parsed.formatInternational()} (${selected.name})`,
       f.get("company") ? `Company: ${f.get("company")}` : null,
       picked.length ? `Help with: ${picked.join(", ")}` : null,
       "",
@@ -163,13 +163,37 @@ function FormInner({ defaults }: { defaults: Defaults }) {
         <div className="flex flex-col gap-1.5 text-sm font-semibold">
           <label htmlFor="phone">Phone *</label>
           <div className="flex gap-2">
-            <select name="cc" aria-label="Country code" defaultValue="+92" className={cn(input, "w-[118px] shrink-0 px-2.5")}>
-              {countryCodes.map((c) => (
-                <option key={c.code} value={c.code}>
-                  {c.label}
-                </option>
-              ))}
-            </select>
+            {/* Compact flag + dial code display; the real <select> sits invisibly on top */}
+            <div className="relative flex w-[112px] shrink-0 items-center gap-1.5 rounded-xl border border-ink-200 bg-white px-3 text-[15px] font-normal focus-within:border-teal-600 focus-within:ring-4 focus-within:ring-teal-500/15">
+              <span aria-hidden className="text-lg leading-none">{selected.flag}</span>
+              <span aria-hidden className="tabular-nums">{selected.dial}</span>
+              <span aria-hidden className="ml-auto text-xs text-ink-400">▾</span>
+              <select
+                name="country"
+                aria-label="Country calling code"
+                value={country}
+                onChange={(e) => {
+                  setCountry(e.target.value as CountryCode);
+                  setPhoneError("");
+                }}
+                className="absolute inset-0 cursor-pointer opacity-0"
+              >
+                <optgroup label="Suggested">
+                  {countries.priority.map((o) => (
+                    <option key={o.code} value={o.code}>
+                      {o.flag} {o.name} ({o.dial})
+                    </option>
+                  ))}
+                </optgroup>
+                <optgroup label="All countries">
+                  {countries.rest.map((o) => (
+                    <option key={o.code} value={o.code}>
+                      {o.flag} {o.name} ({o.dial})
+                    </option>
+                  ))}
+                </optgroup>
+              </select>
+            </div>
             <input
               id="phone"
               name="phone"
@@ -177,12 +201,18 @@ function FormInner({ defaults }: { defaults: Defaults }) {
               required
               autoComplete="tel-national"
               inputMode="tel"
-              pattern="[0-9 ()+\-]{6,20}"
-              title="Digits, spaces and dashes only"
-              className={input}
-              placeholder="301 6475925"
+              aria-invalid={!!phoneError}
+              aria-describedby={phoneError ? "phone-error" : undefined}
+              onChange={() => phoneError && setPhoneError("")}
+              className={cn(input, phoneError && "border-red-500 focus:border-red-500 focus:ring-red-500/15")}
+              placeholder={country === "PK" ? "301 6475925" : "Phone number"}
             />
           </div>
+          {phoneError && (
+            <p id="phone-error" role="alert" className="text-[13px] font-medium text-red-600">
+              {phoneError}
+            </p>
+          )}
         </div>
         <label className="flex flex-col gap-1.5 text-sm font-semibold">
           Company
