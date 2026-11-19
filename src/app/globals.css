@@ -1,0 +1,209 @@
+@import "tailwindcss";
+
+/*
+  Ciylo design tokens
+  -------------------
+  Brand teal #00C9A7 comes from the Figma variable "green-cyan" and the logo.
+  The ramp below is built around it; ink neutrals are the slightly violet
+  near-blacks from the website mockup. See README "Design system".
+*/
+@theme {
+  /* Brand teal ramp */
+  --color-teal-50: #e6faf6;
+  --color-teal-100: #c9efe7;
+  --color-teal-200: #96e5d5;
+  --color-teal-300: #57d9bf;
+  --color-teal-400: #1fcfaf;
+  --color-teal-500: #00c9a7; /* brand */
+  --color-teal-600: #00a78b;
+  --color-teal-700: #007d69; /* text/links on white (AA) */
+  --color-teal-800: #005a4b; /* hover, text on mint */
+  --color-teal-900: #003d33;
+
+  /* Secondary accents (from the Figma variables) */
+  --color-cyan-500: #00abbc; /* "Prime" */
+  --color-lime-400: #a5f31e; /* logo mark spark */
+  --color-graphite: #434343; /* logo mark grey */
+
+  /* Ink neutrals */
+  --color-ink-950: #0b0a0d;
+  --color-ink-900: #111013; /* primary text, dark sections */
+  --color-ink-850: #16151a; /* dark surface */
+  --color-ink-800: #1e1d23; /* dark surface 2 */
+  --color-ink-750: #24232a;
+  --color-ink-700: #2e2d35; /* dark borders */
+  --color-ink-600: #3a3942;
+  --color-ink-500: #55545e; /* muted text on light */
+  --color-ink-400: #8e8e99;
+  --color-ink-300: #a9a9b3; /* subtle text on dark */
+  --color-ink-200: #c9c9d1; /* body text on dark, input borders */
+  --color-ink-150: #e2e2e8; /* borders */
+  --color-ink-100: #efeff3;
+  --color-ink-75: #f2f2f5; /* muted surface */
+  --color-ink-50: #f7f7f9; /* alt surface */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --radius-card: 22px;
+  --radius-panel: 28px;
+
+  --shadow-header: 0 6px 24px rgb(17 16 19 / 0.1);
+  --shadow-pop: 0 24px 60px rgb(17 16 19 / 0.18);
+  --shadow-teal: 0 20px 50px rgb(0 90 75 / 0.12);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  --animate-scan: scan 6s var(--ease-out-expo) infinite;
+  --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @keyframes scan {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      box-shadow: 0 0 0 0 rgb(0 201 167 / 0.55);
+    }
+    50% {
+      box-shadow: 0 0 0 6px rgb(0 201 167 / 0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    scroll-padding-top: 96px;
+  }
+  body {
+    background: var(--color-ink-900);
+    color: var(--color-ink-900);
+    font-family: var(--font-sans);
+  }
+  ::selection {
+    background: var(--color-teal-500);
+    color: var(--color-ink-900);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-teal-500);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1188px;
+    margin-inline: auto;
+    padding-inline: 16px;
+  }
+  @media (min-width: 600px) {
+    .wrap {
+      padding-inline: 24px;
+    }
+  }
+
+  .kicker {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Faint engineering grid used on dark bands */
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.045) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .grid-bg-light {
+    background-image:
+      linear-gradient(to right, rgb(17 16 19 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(17 16 19 / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  /* Client logos: uniform light monochrome on dark backgrounds */
+  .logo-mono-dark {
+    filter: grayscale(1) invert(1) brightness(1.15);
+    opacity: 0.62;
+    transition: opacity 0.3s;
+  }
+  .logo-mono-dark:hover {
+    opacity: 1;
+  }
+  .logo-mono-light {
+    filter: grayscale(1);
+    opacity: 0.7;
+    transition:
+      opacity 0.3s,
+      filter 0.3s;
+  }
+  .logo-mono-light:hover {
+    filter: none;
+    opacity: 1;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
