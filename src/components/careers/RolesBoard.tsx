@@ -54,8 +54,8 @@ export function RolesBoard() {
               className="group flex flex-col gap-4 rounded-[22px] border border-ink-150 bg-white p-6 transition-[border-color,box-shadow] hover:border-teal-500 hover:shadow-[0_24px_50px_-30px_rgb(0_90_75/0.45)]"
             >
               <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-ink-900 px-2.5 py-1 font-mono text-[11px] text-teal-400">{r.team}</span>
-                <span className="rounded-full bg-ink-75 px-2.5 py-1 font-mono text-[11px] text-ink-600">{r.experience}</span>
+                <span className="rounded-full bg-ink-900 px-2.5 py-1 font-semibold text-[11px] text-teal-400">{r.team}</span>
+                <span className="rounded-full bg-ink-75 px-2.5 py-1 font-semibold text-[11px] text-ink-600">{r.experience}</span>
               </div>
               <h3 className="text-[22px] leading-tight font-bold tracking-[-0.02em] transition-colors group-hover:text-teal-700">{r.title}</h3>
               <p className="text-[15px] leading-relaxed text-ink-600">{r.desc}</p>

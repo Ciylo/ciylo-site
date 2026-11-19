@@ -183,7 +183,7 @@ export default function AboutPage() {
                 <RevealItem key={p.slug}>
                   <div className="flex flex-col gap-2">
                     <CiylotronCard p={p} compact />
-                    <p className="px-1 font-mono text-[11px] leading-snug text-teal-800">{p.honours!.join(" · ")}</p>
+                    <p className="px-1 font-semibold text-[11px] leading-snug text-teal-800">{p.honours!.join(" · ")}</p>
                   </div>
                 </RevealItem>
               ))}

@@ -12,7 +12,7 @@ export function LeaderCard({ l }: { l: Leader }) {
           sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 100vw"
           className="absolute inset-0 h-full w-full object-cover object-top transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105"
         />
-        <span className="absolute top-4 left-4 rounded-full bg-ink-900 px-3 py-1 font-mono text-xs text-teal-400">{l.short}</span>
+        <span className="absolute top-4 left-4 rounded-full bg-ink-900 px-3 py-1 font-semibold text-xs text-teal-400">{l.short}</span>
       </div>
       <div className="flex flex-col gap-4 p-7">
         <p className="kicker text-teal-700">{l.role}</p>

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
-import { Img } from "@/components/ui/Img";
+import { DiagramThumb } from "@/components/diagram/DiagramThumb";
+import { diagrams } from "@/data/diagrams";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ContactSection } from "@/components/home/ContactSection";
 import { solutions } from "@/data/solutions";
@@ -30,10 +31,11 @@ export default function SolutionsPage() {
                 href={`/solutions/${s.slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded-3xl bg-ink-900 text-white transition-transform duration-500 hover:-translate-y-1"
               >
-                <div className="relative aspect-[4/3] overflow-hidden">
-                  <Img src={s.image} alt="" sizes="(min-width: 1024px) 380px, 100vw" className="h-full w-full object-cover opacity-70 transition-transform duration-[1.2s] group-hover:scale-105" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink-900 to-transparent" />
-                  <span className="absolute top-4 left-4 rounded-full bg-teal-500 px-3 py-1 font-mono text-[11px] text-ink-900">
+                <div className="relative grid aspect-[4/3] place-items-center overflow-hidden border-b border-ink-700/70 px-5 pt-10 pb-4">
+                  <div aria-hidden className="grid-bg absolute inset-0 [mask-image:radial-gradient(ellipse_at_50%_50%,#000_30%,transparent_80%)]" />
+                  <div aria-hidden className="absolute inset-x-10 top-1/2 h-24 -translate-y-1/2 rounded-full bg-teal-500/10 blur-2xl transition-opacity duration-700 group-hover:opacity-100 opacity-40" />
+                  <DiagramThumb diagram={diagrams[s.slug]} className="relative transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)] group-hover:scale-[1.06]" />
+                  <span className="absolute top-4 left-4 rounded-full bg-teal-500 px-3 py-1 font-semibold text-[11px] text-ink-900">
                     0{idx + 1}
                   </span>
                 </div>
@@ -42,7 +44,7 @@ export default function SolutionsPage() {
                   <p className="text-[15px] leading-relaxed text-ink-200">{s.short}</p>
                   <div className="mt-auto flex flex-wrap gap-1.5 pt-3">
                     {["Hardware", "Firmware", "App", "Cloud"].map((l) => (
-                      <span key={l} className="rounded-full border border-ink-600 px-2.5 py-1 font-mono text-[11px] text-ink-200">
+                      <span key={l} className="rounded-full border border-ink-600 px-2.5 py-1 font-semibold text-[11px] text-ink-200">
                         {l}
                       </span>
                     ))}

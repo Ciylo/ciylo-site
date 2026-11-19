@@ -6,7 +6,8 @@ import { getIndustry } from "@/data/industries";
 import { PageHero } from "@/components/PageHero";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
-import { Img } from "@/components/ui/Img";
+import { FlowDiagram } from "@/components/diagram/FlowDiagram";
+import { diagrams } from "@/data/diagrams";
 import { Button } from "@/components/ui/Button";
 import { ServiceCards } from "@/components/ServiceChips";
 import { contactHref } from "@/lib/contact";
@@ -51,28 +52,34 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
 
       {/* Problem */}
       <section className="bg-white py-20">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-2">
+        <div className="wrap grid items-start gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
           <div className="flex flex-col gap-5">
             <p className="kicker text-teal-700">The problem</p>
             <Reveal>
               <p className="text-[clamp(20px,2.2vw,26px)] leading-[1.45] font-medium tracking-[-0.01em]">{s.problem}</p>
             </Reveal>
-            <RevealGroup className="grid gap-2 sm:grid-cols-2">
+          </div>
+          <RevealGroup className="grid gap-2 lg:pt-9">
               {s.pains.map((p) => (
-                <RevealItem key={p} className="flex items-center gap-3 rounded-2xl bg-ink-50 px-4 py-3 text-[15px]">
+                <RevealItem key={p} className="flex items-center gap-3 rounded-2xl bg-ink-50 px-4 py-3.5 text-[15px] font-medium">
                   <span className="grid size-6 shrink-0 place-items-center rounded-full bg-ink-900 text-xs text-teal-400" aria-hidden>
                     !
                   </span>
                   {p}
                 </RevealItem>
               ))}
-            </RevealGroup>
-          </div>
-          <Reveal className="overflow-hidden rounded-[28px]">
-            <Img src={s.image} alt="" sizes="(min-width: 1024px) 560px, 100vw" className="aspect-[4/3] w-full object-cover" />
-          </Reveal>
+          </RevealGroup>
         </div>
       </section>
+
+      {/* How it works: interactive architecture */}
+      {diagrams[s.slug] && (
+        <section className="bg-white pb-20">
+          <Reveal className="wrap">
+            <FlowDiagram diagram={diagrams[s.slug]} />
+          </Reveal>
+        </section>
+      )}
 
       {/* Included */}
       <section id="included" className="scroll-mt-24 bg-ink-50 py-20">
@@ -87,7 +94,7 @@ export default async function SolutionPage({ params }: PageProps<"/solutions/[sl
           <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {s.included.map((l, i) => (
               <RevealItem key={l.layer} className={cn("flex flex-col gap-4 rounded-[22px] p-6", layerStyle[l.layer])}>
-                <span className="flex items-center justify-between font-mono text-xs opacity-80">
+                <span className="flex items-center justify-between font-semibold text-xs opacity-80">
                   {String(i + 1).padStart(2, "0")} · {l.layer.toUpperCase()}
                 </span>
                 <strong className="text-xl tracking-[-0.01em]">{l.title}</strong>

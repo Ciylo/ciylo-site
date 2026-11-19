@@ -8,6 +8,8 @@ import { PageHero } from "@/components/PageHero";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { Img } from "@/components/ui/Img";
+import { FlowDiagram } from "@/components/diagram/FlowDiagram";
+import { diagrams } from "@/data/diagrams";
 import { Button } from "@/components/ui/Button";
 import { ServiceCards } from "@/components/ServiceChips";
 import { WorkCard } from "@/components/work/WorkCard";
@@ -32,6 +34,7 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
   const cases = i.work.map(getWork).filter((c) => c !== undefined);
   const sols = solutions.filter((s) => s.industries.includes(i.slug));
   const cta = contactHref({ inquiry: "new-project", industry: i.slug });
+  const diagram = i.diagram ? diagrams[i.diagram] : undefined;
 
   return (
     <>
@@ -47,22 +50,28 @@ export default async function IndustryPage({ params }: PageProps<"/industries/[s
       </PageHero>
 
       <section className="bg-white py-20">
-        <div className="wrap grid items-center gap-12 lg:grid-cols-2">
+        <div className={diagram ? "wrap flex flex-col gap-12" : "wrap grid items-center gap-12 lg:grid-cols-2"}>
           <div className="flex flex-col gap-5">
             <p className="kicker text-teal-700">What we build for {i.name.toLowerCase()}</p>
             <SplitHeading text="Where we help most" className="text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]" />
-            <RevealGroup role="list" className="flex flex-col">
+            <RevealGroup role="list" className={diagram ? "grid gap-x-10 sm:grid-cols-2" : "flex flex-col"}>
               {i.focus.map((f, n) => (
-                <RevealItem key={f} role="listitem" className="flex items-center gap-4 border-t border-ink-150 py-4 last:border-b">
+                <RevealItem key={f} role="listitem" className="flex items-center gap-4 border-t border-ink-150 py-4 last:border-b sm:[&:nth-last-child(2):nth-child(odd)]:border-b">
                   <span className="font-mono text-xs text-teal-700">{String(n + 1).padStart(2, "0")}</span>
                   <span className="text-lg font-semibold tracking-[-0.01em]">{f}</span>
                 </RevealItem>
               ))}
             </RevealGroup>
           </div>
-          <Reveal className="overflow-hidden rounded-[28px] bg-ink-850">
-            <Img src={i.image} alt="" sizes="(min-width: 1024px) 560px, 100vw" className="aspect-[4/3] w-full object-cover" />
-          </Reveal>
+          {diagram ? (
+            <Reveal>
+              <FlowDiagram diagram={diagram} />
+            </Reveal>
+          ) : (
+            <Reveal className="overflow-hidden rounded-[28px] bg-ink-850">
+              <Img src={i.image} alt="" sizes="(min-width: 1024px) 560px, 100vw" className="aspect-[4/3] w-full object-cover" />
+            </Reveal>
+          )}
         </div>
       </section>
 

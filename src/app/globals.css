@@ -42,8 +42,8 @@
   --color-ink-75: #f2f2f5; /* muted surface */
   --color-ink-50: #f7f7f9; /* alt surface */
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-sans: var(--font-sans-face), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono-face), ui-monospace, monospace;
 
   --radius-card: 22px;
   --radius-panel: 28px;
@@ -148,11 +148,14 @@
     }
   }
 
+  /* Eyebrow label: sans, semibold, tracked caps (Apple / NVIDIA style) */
   .kicker {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    letter-spacing: 0.06em;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    font-weight: 650;
+    letter-spacing: 0.09em;
     text-transform: uppercase;
+    font-stretch: 105%;
   }
 
   /* Faint engineering grid used on dark bands */
@@ -198,6 +201,16 @@
   }
   .text-pretty {
     text-wrap: pretty;
+  }
+}
+
+/* Diagram link flow (thumbnails) */
+.thumb-flow {
+  animation: thumb-flow 1.6s linear infinite;
+}
+@keyframes thumb-flow {
+  to {
+    stroke-dashoffset: -28;
   }
 }
 

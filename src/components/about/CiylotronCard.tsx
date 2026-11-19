@@ -36,7 +36,7 @@ export function CiylotronCard({ p, className, compact }: { p: Ciylotron; classNa
               : "inset-x-0 bottom-0 mx-auto h-[92%] w-auto max-w-none object-contain object-bottom",
           )}
         />
-        <span className="absolute top-3 left-3 rounded-full bg-white/80 px-2.5 py-1 font-mono text-[10px] tracking-wide text-ink-900 uppercase backdrop-blur">
+        <span className="absolute top-3 left-3 rounded-full bg-white/80 px-2.5 py-1 font-semibold text-[10px] tracking-wide text-ink-900 uppercase backdrop-blur">
           {p.discipline}
         </span>
         {p.honours && p.honours.length > 0 && (

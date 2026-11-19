@@ -45,7 +45,7 @@ export function Lab() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.03, duration: 0.4 }}
-                className="rounded-full border border-ink-600 bg-ink-850 px-3 py-1.5 font-mono text-xs text-ink-200 transition-colors hover:border-teal-500 hover:text-teal-400"
+                className="rounded-full border border-ink-600 bg-ink-850 px-3 py-1.5 font-semibold text-xs text-ink-200 transition-colors hover:border-teal-500 hover:text-teal-400"
               >
                 {s}
               </motion.li>

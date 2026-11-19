@@ -15,6 +15,8 @@ export type IndustryPage = {
   services: string[];
   work: string[];
   image: string;
+  /** Key into src/data/diagrams.ts. Used instead of the photo where no relevant photo exists */
+  diagram?: string;
 };
 
 export const industryPages: IndustryPage[] = [
@@ -53,6 +55,7 @@ export const industryPages: IndustryPage[] = [
     services: ["iot", "embedded", "edge-ai", "data", "cloud", "cybersecurity"],
     work: [],
     image: "/images/lab/bench-wide.webp",
+    diagram: "energy",
   },
   {
     slug: "oil-and-gas",
@@ -65,6 +68,7 @@ export const industryPages: IndustryPage[] = [
     services: ["iot", "embedded", "data", "robotics", "cybersecurity", "certification"],
     work: [],
     image: "/images/lab/pcb-probe.webp",
+    diagram: "oil-and-gas",
   },
   {
     slug: "manufacturing",
@@ -77,6 +81,7 @@ export const industryPages: IndustryPage[] = [
     services: ["iot", "robotics", "manufacturing", "mechanical", "data", "erp-crm"],
     work: [],
     image: "/images/lab/soldering.webp",
+    diagram: "manufacturing",
   },
   {
     slug: "agriculture",
@@ -89,6 +94,7 @@ export const industryPages: IndustryPage[] = [
     services: ["iot", "embedded", "edge-ai", "mechanical", "data", "software"],
     work: [],
     image: "/images/lab/embedded-desk.webp",
+    diagram: "agriculture",
   },
   {
     slug: "retail",
@@ -113,6 +119,7 @@ export const industryPages: IndustryPage[] = [
     services: ["kiosks", "ecommerce", "software", "erp-crm", "data"],
     work: [],
     image: "/images/office/meeting.webp",
+    diagram: "restaurants",
   },
   {
     slug: "telecom",

@@ -65,7 +65,7 @@ export default function ServicesPage() {
                 key={p.step}
                 className="group relative flex flex-col gap-3 rounded-[20px] bg-ink-900 p-5 text-white transition-transform duration-500 hover:-translate-y-1"
               >
-                <span className="flex items-center justify-between font-mono text-xs text-teal-400">
+                <span className="flex items-center justify-between font-semibold text-xs text-teal-400">
                   {p.step}
                   {i < mvpPipeline.length - 1 && <span className="hidden text-ink-500 lg:inline">→</span>}
                 </span>

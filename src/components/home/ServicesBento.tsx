@@ -113,7 +113,7 @@ export function ServicesBento() {
                       <span className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2">
                         <span
                           className={cn(
-                            "font-mono text-xs",
+                            "font-semibold text-xs",
                             hero ? "text-ink-900/70" : dark ? "text-ink-500" : "text-ink-500",
                           )}
                         >

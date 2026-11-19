@@ -110,7 +110,7 @@ export function ServiceAccordion() {
                       <span className="flex-[1_1_240px] text-[clamp(18px,2vw,22px)] font-bold tracking-[-0.02em]">{s.name}</span>
                       <span
                         className={cn(
-                          "rounded-full px-3 py-1 font-mono text-xs",
+                          "rounded-full px-3 py-1 font-semibold text-xs",
                           s.group === "Hardware" ? "bg-ink-900 text-teal-500" : hero ? "bg-teal-500 text-ink-900" : s.group === "Advisory" ? "bg-ink-75 text-ink-900" : "bg-teal-50 text-teal-800",
                         )}
                       >

@@ -8,13 +8,16 @@
     "start": "next start",
     "lint": "eslint",
     "images:manifest": "node scripts/image-manifest.mjs",
-    "map": "node scripts/world-map.mjs"
+    "map": "node scripts/world-map.mjs",
+    "globe": "node scripts/globe-points.mjs",
+    "countries": "node scripts/country-names.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
     "dotted-map": "^3.1.0",
     "lenis": "^1.3.27",
     "libphonenumber-js": "^1.13.17",
+    "lucide-react": "^1.76.0",
     "motion": "^14.14.0",
     "next": "16.4.6",
     "react": "19.3.0",

@@ -302,7 +302,7 @@ function ServicesMenu() {
                 >
                   <span className="flex flex-col">
                     <span className="text-[15px] font-semibold text-ink-900">{s.name}</span>
-                    <span className="font-mono text-[11px] text-ink-500">{s.tags.slice(0, 3).join(" · ")}</span>
+                    <span className="font-semibold text-[11px] text-ink-500">{s.tags.slice(0, 3).join(" · ")}</span>
                   </span>
                   <span className={cn("text-teal-700", preview.id === s.id ? "opacity-100" : "opacity-0")} aria-hidden>
                     →
@@ -324,7 +324,7 @@ function ServicesMenu() {
               <p className="text-xl leading-snug font-bold">{preview.name}</p>
               <p className="text-sm leading-relaxed text-ink-200">{preview.short}</p>
               {preview.work.length > 0 && (
-                <p className="font-mono text-xs text-teal-400">
+                <p className="font-semibold text-xs text-teal-400">
                   {preview.work.length} case {preview.work.length === 1 ? "study" : "studies"}
                 </p>
               )}

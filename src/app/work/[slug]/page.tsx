@@ -146,7 +146,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
                 key={f.title}
                 className="group flex flex-col gap-3 rounded-[22px] border border-ink-100 bg-white p-6 transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-[0_24px_50px_-30px_rgb(17_16_19/0.35)]"
               >
-                <span className="font-mono text-xs" style={{ color: c.accent }}>
+                <span className="font-semibold text-xs" style={{ color: c.accent }}>
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <strong className="text-lg tracking-[-0.01em]">{f.title}</strong>

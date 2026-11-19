@@ -2,6 +2,7 @@ import { Hero } from "@/components/home/Hero";
 import { Statement } from "@/components/home/Statement";
 import { ServicesBento } from "@/components/home/ServicesBento";
 import { Lab } from "@/components/home/Lab";
+import { StackDiagram } from "@/components/home/StackDiagram";
 import { Process } from "@/components/home/Process";
 import { SelectedWork } from "@/components/home/SelectedWork";
 import { WhyCiylo } from "@/components/home/WhyCiylo";
@@ -22,6 +23,7 @@ export default function Home() {
       <Hero video={heroVideo} />
       <Statement />
       <ServicesBento />
+      <StackDiagram />
       <Lab />
       <Process />
       <SelectedWork />

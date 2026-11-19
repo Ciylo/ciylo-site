@@ -31,7 +31,7 @@ export function SocialStrip() {
                 </span>
               </strong>
               <span className="text-sm text-ink-500">{blurbs[s.label]}</span>
-              <span className="font-mono text-xs text-ink-400">@{new URL(s.href).pathname.split("/").filter(Boolean).pop()}</span>
+              <span className="font-semibold text-xs text-ink-400">@{new URL(s.href).pathname.split("/").filter(Boolean).pop()}</span>
             </span>
           </a>
         </RevealItem>

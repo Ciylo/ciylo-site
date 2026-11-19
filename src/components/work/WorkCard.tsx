@@ -37,7 +37,7 @@ export function WorkCard({ c, size = "md", className }: { c: CaseStudy; size?: "
             c.coverFit === "cover" ? "object-cover object-top" : "object-contain p-4",
           )}
         />
-        <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 font-mono text-[11px] text-ink-900 backdrop-blur">
+        <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 font-semibold text-[11px] text-ink-900 backdrop-blur">
           {c.industry}
         </span>
         <span
