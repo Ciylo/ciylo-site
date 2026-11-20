@@ -22,7 +22,7 @@ export function CiylotronCard({
   compact?: boolean;
 }) {
   return (
-    <Tilt className={cn("rounded-[22px]", className)} max={8}>
+    <Tilt className={cn("rounded-[22px]", className)} max={compact ? 0 : 8} glare={!compact}>
       <figure className="group relative h-full overflow-hidden rounded-[22px] bg-ink-75 transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgb(17_16_19/0.4)]">
         <div
           className={cn(
