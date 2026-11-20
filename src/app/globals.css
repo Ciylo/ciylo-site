@@ -155,7 +155,6 @@
     font-weight: 650;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    font-stretch: 105%;
   }
 
   /* Faint engineering grid used on dark bands */
@@ -204,6 +203,26 @@
   }
 }
 
+/* Skeleton loaders */
+.skeleton {
+  background-size: 300% 100%;
+  animation: skeleton-wave 1.6s ease-in-out infinite;
+}
+.skeleton-light {
+  background-image: linear-gradient(100deg, #efeff3 30%, #f9f9fb 50%, #efeff3 70%);
+}
+.skeleton-dark {
+  background-image: linear-gradient(100deg, #1e1d23 30%, #2a2930 50%, #1e1d23 70%);
+}
+@keyframes skeleton-wave {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
 /* Animated gradient text for hero accents */
 .text-shimmer {
   background: linear-gradient(100deg, #00c9a7 0%, #57d9bf 30%, #a5f31e 50%, #00abbc 70%, #00c9a7 100%);
@@ -243,6 +262,8 @@
   transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transform-style: preserve-3d;
   transition: transform 0.6s var(--ease-out-expo);
+}
+.tilt:hover {
   will-change: transform;
 }
 .tilt[data-tilting="true"] {
@@ -274,6 +295,19 @@
   }
 }
 
+/* Services: MVP pipeline pulse */
+.pipeline-pulse {
+  animation: pipeline-pulse 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+@keyframes pipeline-pulse {
+  from {
+    left: -25%;
+  }
+  to {
+    left: 100%;
+  }
+}
+
 /* Diagram link flow (thumbnails) */
 .thumb-flow {
   animation: thumb-flow 1.6s linear infinite;
@@ -281,6 +315,46 @@
 @keyframes thumb-flow {
   to {
     stroke-dashoffset: -28;
+  }
+}
+
+/* View transitions (React <ViewTransition>): page crossfade + case-cover morph */
+::view-transition-old(.page) {
+  animation: 160ms ease-out both vt-out;
+}
+::view-transition-new(.page) {
+  animation: 360ms cubic-bezier(0.16, 1, 0.3, 1) 90ms both vt-in;
+}
+::view-transition-group(.morph) {
+  animation-duration: 450ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+::view-transition-image-pair(.morph) {
+  animation-name: vt-via-blur;
+}
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    filter: blur(4px);
+  }
+}
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+}
+@keyframes vt-via-blur {
+  30% {
+    filter: blur(3px);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
   }
 }
 

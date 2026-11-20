@@ -60,7 +60,11 @@ export function HeroMosaic() {
             quality={60}
             loading={i < 2 ? "eager" : "lazy"}
             fetchPriority={i === 0 ? "high" : "auto"}
-            className={cn("object-cover", !reduce && (i % 2 === 0 ? "animate-kenburns" : "animate-kenburns-rev"))}
+            className={cn(
+              "object-cover",
+              // Only the visible and outgoing frames animate; hidden layers stay idle
+              !reduce && (i === index || i === (index - 1 + frames.length) % frames.length) && (i % 2 === 0 ? "animate-kenburns" : "animate-kenburns-rev"),
+            )}
             style={{ objectPosition: f.pos }}
           />
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { useRef } from "react";
+import { useRef, ViewTransition } from "react";
 import { Img } from "@/components/ui/Img";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { cn } from "@/lib/cn";
@@ -11,8 +11,15 @@ import type { CaseStudy } from "@/data/work";
 export function CoverParallax({ c }: { c: CaseStudy }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotionSafe();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], reduce ? [1, 1, 1] : [0.92, 1, 1.04]);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+  const scale = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    reduce ? [1, 1, 1] : [0.92, 1, 1.04],
+  );
   const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [-30, 30]);
   const dark = c.stage === "dark";
 
@@ -28,17 +35,26 @@ export function CoverParallax({ c }: { c: CaseStudy }) {
         <div
           aria-hidden
           className="absolute inset-0 -z-10"
-          style={{ background: `radial-gradient(60% 60% at 50% 55%, ${c.accent}${dark ? "55" : "33"}, transparent 70%)` }}
+          style={{
+            background: `radial-gradient(60% 60% at 50% 55%, ${c.accent}${dark ? "55" : "33"}, transparent 70%)`,
+          }}
         />
         <motion.div style={{ y }} className="absolute inset-0">
-          <Img
-            src={c.cover}
-            alt={`${c.name} product overview`}
-            loading="eager"
-            fetchPriority="high"
-            sizes="(min-width: 1188px) 1140px, 100vw"
-            className={cn("h-full w-full", c.coverFit === "cover" ? "object-cover object-top" : "object-contain p-6 sm:p-10")}
-          />
+          <ViewTransition name={`cover-${c.slug}`} share="morph" default="none">
+            <Img
+              src={c.cover}
+              alt={`${c.name} product overview`}
+              loading="eager"
+              fetchPriority="high"
+              sizes="(min-width: 1188px) 1140px, 100vw"
+              className={cn(
+                "h-full w-full",
+                c.coverFit === "cover"
+                  ? "object-cover object-top"
+                  : "object-contain p-6 sm:p-10",
+              )}
+            />
+          </ViewTransition>
         </motion.div>
       </motion.div>
     </div>

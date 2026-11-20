@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ViewTransition } from "react";
 import { Img } from "@/components/ui/Img";
 import { cn } from "@/lib/cn";
 import { Tilt } from "@/components/ui/Tilt";
@@ -40,6 +41,7 @@ export function WorkCard({
               background: `radial-gradient(70% 60% at 50% 60%, ${c.accent}${dark ? "40" : "26"}, transparent 70%)`,
             }}
           />
+          <ViewTransition name={`cover-${c.slug}`} share="morph" default="none">
           <Img
             src={c.cover}
             alt={`${c.name}: ${c.tagline}`}
@@ -55,6 +57,7 @@ export function WorkCard({
                 : "object-contain p-4",
             )}
           />
+          </ViewTransition>
           <span className="absolute top-4 left-4 rounded-full bg-white/90 px-3 py-1 font-semibold text-[11px] text-ink-900 backdrop-blur">
             {c.industry}
           </span>

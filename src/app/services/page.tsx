@@ -59,14 +59,21 @@ export default function ServicesPage() {
               </p>
             </Reveal>
           </div>
+          <div className="relative">
+          {/* Pipeline track with a travelling pulse (lg+) */}
+          <div aria-hidden className="pointer-events-none absolute top-[30px] right-[8%] left-[8%] z-10 hidden h-0.5 overflow-hidden rounded-full bg-ink-900/25 lg:block">
+            <span className="pipeline-pulse absolute inset-y-0 w-1/4 bg-gradient-to-r from-transparent via-white to-transparent" />
+          </div>
           <RevealGroup className="grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
             {mvpPipeline.map((p, i) => (
               <RevealItem
                 key={p.step}
-                className="group relative flex flex-col gap-3 rounded-[20px] bg-ink-900 p-5 text-white transition-transform duration-500 hover:-translate-y-1"
+                className="group relative flex flex-col gap-3 rounded-[20px] bg-ink-900 p-5 text-white transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgb(0_61_51/0.7)]"
               >
                 <span className="flex items-center justify-between font-semibold text-xs text-teal-400">
-                  {p.step}
+                  <span className="relative z-20 grid size-7 place-items-center rounded-full bg-teal-500 font-mono text-[11px] text-ink-900 ring-4 ring-ink-900 transition-transform duration-300 group-hover:scale-110">
+                    {p.step}
+                  </span>
                   {i < mvpPipeline.length - 1 && <span className="hidden text-ink-500 lg:inline">→</span>}
                 </span>
                 <strong className="text-lg">{p.title}</strong>
@@ -74,6 +81,7 @@ export default function ServicesPage() {
               </RevealItem>
             ))}
           </RevealGroup>
+          </div>
           <div className="flex flex-wrap items-center gap-4">
             <Button href="/contact" variant="dark" arrow>
               Start your MVP

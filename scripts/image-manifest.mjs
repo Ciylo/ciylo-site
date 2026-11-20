@@ -1,5 +1,6 @@
 // Generates src/data/image-manifest.json with intrinsic sizes for every
-// raster in public/images, so next/image can render without layout shift.
+// raster in public/images, so next/image can render without layout shift,
+// plus a dominant-colour placeholder for opaque photos.
 // Run after adding or replacing images:  npm run images:manifest
 import sharp from "sharp";
 import { readdirSync, statSync, writeFileSync } from "node:fs";
@@ -18,7 +19,13 @@ walk(join(root, "images"));
 const manifest = {};
 for (const [url, p] of Object.entries(out).sort()) {
   const m = await sharp(p).metadata();
-  manifest[url] = [m.width, m.height];
+  // Opaque photos also get their average colour, used as a placeholder while they load
+  if (m.hasAlpha) manifest[url] = [m.width, m.height];
+  else {
+    const { dominant } = await sharp(p).resize(32, 32, { fit: "cover" }).stats();
+    const hex = "#" + [dominant.r, dominant.g, dominant.b].map((v) => v.toString(16).padStart(2, "0")).join("");
+    manifest[url] = [m.width, m.height, hex];
+  }
 }
 writeFileSync("src/data/image-manifest.json", JSON.stringify(manifest, null, 0).replace(/\],/g, "],\n") + "\n");
 console.log(`image-manifest: ${Object.keys(manifest).length} images`);
