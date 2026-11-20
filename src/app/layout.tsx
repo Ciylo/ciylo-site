@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { ViewTransition } from "react";
 import { Mona_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
@@ -92,7 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <ScrollProgress />
           <Header />
           <main id="main" tabIndex={-1} className="bg-white outline-none">
-            <ViewTransition default="page">{children}</ViewTransition>
+            {children}
           </main>
           <Footer />
         </MotionProvider>

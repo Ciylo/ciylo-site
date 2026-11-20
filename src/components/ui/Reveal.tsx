@@ -1,59 +1,67 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "motion/react";
+import { useRef, type CSSProperties, type HTMLAttributes } from "react";
+import { useInViewOnce } from "@/lib/useInViewOnce";
+import { cn } from "@/lib/cn";
 
-type Props = HTMLMotionProps<"div"> & {
-  delay?: number;
-  y?: number;
-  /** Fraction of the element that must be visible before it animates */
-  amount?: number;
-};
+type DivProps = HTMLAttributes<HTMLDivElement>;
 
-/** Fade + rise into view. Respects prefers-reduced-motion. */
-export function Reveal({ delay = 0, y = 28, amount = 0.2, children, ...rest }: Props) {
+/**
+ * Fade + rise into view. CSS transitions driven by one shared observer
+ * (see globals.css "Reveal"); reduced motion is handled in CSS.
+ */
+export function Reveal({
+  delay = 0,
+  y = 28,
+  amount = 0.2,
+  className,
+  style,
+  children,
+  ...rest
+}: DivProps & { delay?: number; y?: number; amount?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const shown = useInViewOnce(ref, amount);
   return (
-    <motion.div
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount }}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      ref={ref}
+      data-shown={shown || undefined}
+      className={cn("reveal", className)}
+      style={{ ...style, "--rv-delay": `${delay}s`, "--rv-y": `${y}px` } as CSSProperties}
       {...rest}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-/** Staggers its direct <RevealItem> children. */
+/** Staggers its direct <RevealItem> children (CSS nth-child delays). */
 export function RevealGroup({
   stagger = 0.08,
   amount = 0.15,
+  className,
+  style,
   children,
   ...rest
-}: HTMLMotionProps<"div"> & { stagger?: number; amount?: number }) {
+}: DivProps & { stagger?: number; amount?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const shown = useInViewOnce(ref, amount);
   return (
-    <motion.div
-      initial={"hidden"}
-      whileInView="show"
-      viewport={{ once: true, amount }}
-      variants={{ hidden: {}, show: { transition: { staggerChildren: stagger } } }}
+    <div
+      ref={ref}
+      data-shown={shown || undefined}
+      className={cn("reveal-group", className)}
+      style={{ ...style, "--rv-stagger": `${stagger}s` } as CSSProperties}
       {...rest}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-export function RevealItem({ y = 24, children, ...rest }: HTMLMotionProps<"div"> & { y?: number }) {
+export function RevealItem({ y = 24, className, style, children, ...rest }: DivProps & { y?: number }) {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y },
-        show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
-      }}
-      {...rest}
-    >
+    <div className={cn("reveal-item", className)} style={{ ...style, "--rv-y": `${y}px` } as CSSProperties} {...rest}>
       {children}
-    </motion.div>
+    </div>
   );
 }

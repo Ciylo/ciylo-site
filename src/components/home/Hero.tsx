@@ -9,7 +9,7 @@ import {
   useSpring,
   useTransform,
 } from "motion/react";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Button } from "@/components/ui/Button";
 import { Marquee } from "@/components/ui/Marquee";
@@ -95,17 +95,14 @@ export function Hero({ video }: { video?: string }) {
           style={reduce ? undefined : { y: contentY, opacity: contentOpacity }}
           className="mx-auto flex max-w-[940px] flex-col items-center gap-6 text-center"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2.5 rounded-full border border-ink-600 bg-ink-850/70 py-1.5 pr-3.5 pl-1.5 text-[13px] text-ink-200 backdrop-blur"
+          <div
+            className="hero-in inline-flex items-center gap-2.5 rounded-full border border-ink-600 bg-ink-850/70 py-1.5 pr-3.5 pl-1.5 text-[13px] text-ink-200 backdrop-blur"
           >
             <span className="rounded-full bg-teal-500 px-2.5 py-0.5 text-xs font-bold text-ink-900">
               7+ yrs
             </span>
             Silicon to screen, under one roof in Lahore
-          </motion.div>
+          </div>
 
           <SplitHeading
             as="h1"
@@ -117,22 +114,18 @@ export function Hero({ video }: { video?: string }) {
             className="text-[clamp(40px,7vw,72px)] leading-[1.02] font-extrabold tracking-[-0.035em]"
           />
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="max-w-[640px] text-lg leading-relaxed text-pretty text-ink-200"
+          <p
+            style={{ "--hd": "0.45s" } as CSSProperties}
+            className="hero-in max-w-[640px] text-lg leading-relaxed text-pretty text-ink-200"
           >
             Ciylo turns ambitious ideas into products people can hold and use:
             circuit boards, firmware, AI models and the software on top, shipped
             together with no hand-offs.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-wrap justify-center gap-3"
+          <div
+            style={{ "--hd": "0.6s" } as CSSProperties}
+            className="hero-in flex flex-wrap justify-center gap-3"
           >
             <Button href="/contact" arrow>
               Start a project
@@ -140,7 +133,7 @@ export function Hero({ video }: { video?: string }) {
             <Button href="#services" variant="ghost-dark">
               See what we build ↓
             </Button>
-          </motion.div>
+          </div>
 
           <motion.a
             href="#services"
