@@ -24,7 +24,7 @@ export const solutions: Solution[] = [
     short: "Telemetry hardware and a live dashboard for towers, plants, farms and remote assets.",
     hero: "Know what's happening at every site, without driving there.",
     problem:
-      "Remote sites fail quietly. A generator runs dry, a cabinet overheats or a pump stops, and nobody knows until a customer complains or a crew is sent out to check.",
+      "Remote sites fail quietly. The generators runs dry, a cabinet overheats or a pump stops, and nobody knows until a customer complains or a crew is sent out to check.",
     pains: ["Truck rolls just to check status", "Outages discovered too late", "Data stuck in local panels", "No history to plan maintenance"],
     included: [
       { layer: "Hardware", title: "Telemetry unit", items: ["Rugged gateway with sensor inputs", "Power, temperature, door and fuel sensing", "Cellular, LoRa or Wi-Fi backhaul"] },
