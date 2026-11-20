@@ -101,7 +101,24 @@ export function Hero({ video }: { video?: string }) {
             <span className="rounded-full bg-teal-500 px-2.5 py-0.5 text-xs font-bold text-ink-900">
               7+ yrs
             </span>
-            Silicon to screen, under one roof in Lahore
+            <span>
+            <span className="inline-flex items-center gap-1.5 align-middle">
+              <span className="s2s-from font-semibold">Silicon</span>
+              <span className="sr-only">to</span>
+              {/* Arrow travels silicon → screen; each word glows as it leaves / lands */}
+              <span aria-hidden className="s2s-track relative inline-block h-3 w-9">
+                <span className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-ink-500/60" />
+                <span className="s2s-arrow absolute top-1/2 left-0 flex -translate-y-1/2 items-center">
+                  <span className="h-0.5 w-3.5 rounded-full bg-gradient-to-r from-transparent to-teal-400" />
+                  <svg viewBox="0 0 8 10" className="-ml-px h-2.5 w-2 text-teal-400" fill="currentColor">
+                    <path d="M0 0l8 5-8 5 2-5z" />
+                  </svg>
+                </span>
+              </span>
+              <span className="s2s-to font-semibold">screen</span>
+            </span>
+            <span className="align-middle">, under one roof in Lahore</span>
+            </span>
           </div>
 
           <SplitHeading
@@ -127,37 +144,14 @@ export function Hero({ video }: { video?: string }) {
             style={{ "--hd": "0.6s" } as CSSProperties}
             className="hero-in flex flex-wrap justify-center gap-3"
           >
-            <Button href="/contact" arrow>
+            <Button href="/contact" arrow flood>
               Start a project
             </Button>
-            <Button href="#services" variant="ghost-dark">
+            <Button href="#services" variant="ghost-dark" flood>
               See what we build ↓
             </Button>
           </div>
 
-          <motion.a
-            href="#services"
-            aria-label="Scroll to services"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.4 }}
-            className="group mt-2 flex flex-col items-center gap-2 text-[11px] text-ink-300 hover:text-teal-400"
-          >
-            <span className="kicker">Scroll</span>
-            <span className="relative flex h-9 w-5 justify-center rounded-full border border-ink-500 group-hover:border-teal-400">
-              <motion.span
-                className="mt-1.5 block h-2 w-0.5 rounded-full bg-teal-500"
-                animate={
-                  reduce ? undefined : { y: [0, 12, 0], opacity: [1, 0.2, 1] }
-                }
-                transition={{
-                  duration: 1.8,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
-            </span>
-          </motion.a>
         </motion.div>
 
         {/* Clients */}

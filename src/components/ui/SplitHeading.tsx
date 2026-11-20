@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { Fragment, useRef, type CSSProperties } from "react";
 import { useInViewOnce } from "@/lib/useInViewOnce";
 import { cn } from "@/lib/cn";
 
@@ -44,12 +44,15 @@ export function SplitHeading({
       {words.map((w, i) => {
         const clean = w.replace(/[.,!?:]/g, "");
         return (
-          <span key={i} aria-hidden className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
+          <Fragment key={i}>
+          <span aria-hidden className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-bottom">
             <span className={cn("split-word", accent.includes(clean) && accentClassName)} style={{ "--i": i } as CSSProperties}>
               {w}
             </span>
-            {i < words.length - 1 ? " " : null}
           </span>
+          {/* Space outside the masked span so text extractors keep words apart */}
+          {i < words.length - 1 ? " " : null}
+          </Fragment>
         );
       })}
     </Tag>

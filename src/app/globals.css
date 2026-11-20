@@ -43,7 +43,6 @@
   --color-ink-50: #f7f7f9; /* alt surface */
 
   --font-sans: var(--font-sans-face), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-mono-face), ui-monospace, monospace;
 
   --radius-card: 22px;
   --radius-panel: 28px;
@@ -293,6 +292,73 @@
   to {
     transform: none;
     opacity: 1;
+  }
+}
+
+/* Hero pill: arrow from "Silicon" to "screen" */
+.s2s-from,
+.s2s-to {
+  transition: color 0.3s;
+}
+.s2s-from {
+  animation: s2s-from 3s ease-in-out infinite;
+}
+.s2s-to {
+  animation: s2s-to 3s ease-in-out infinite;
+}
+.s2s-arrow {
+  animation: s2s-arrow 3s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes s2s-from {
+  0%,
+  100% {
+    color: inherit;
+    text-shadow: none;
+  }
+  8%,
+  22% {
+    color: #57d9bf;
+    text-shadow: 0 0 10px rgb(0 201 167 / 0.85), 0 0 22px rgb(0 201 167 / 0.45);
+  }
+  40% {
+    color: inherit;
+    text-shadow: none;
+  }
+}
+@keyframes s2s-arrow {
+  0%,
+  12% {
+    transform: translate(-6px, -50%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  58% {
+    transform: translate(calc(2.25rem - 18px), -50%);
+    opacity: 1;
+  }
+  66%,
+  100% {
+    transform: translate(calc(2.25rem - 14px), -50%);
+    opacity: 0;
+  }
+}
+@keyframes s2s-to {
+  0%,
+  54% {
+    color: inherit;
+    text-shadow: none;
+  }
+  62%,
+  80% {
+    color: #57d9bf;
+    text-shadow: 0 0 10px rgb(0 201 167 / 0.85), 0 0 22px rgb(0 201 167 / 0.45);
+  }
+  96%,
+  100% {
+    color: inherit;
+    text-shadow: none;
   }
 }
 

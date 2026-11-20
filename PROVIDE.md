@@ -55,3 +55,16 @@ Also useful:
 - Client permission for all 10 case studies and all client logos (incl. ChipMango)
 - Confirmed facts: 7+ years, 300+ products, 80+ clients, 20+ industries, 35-person team, clients in USA, UK, Germany, France, Malta, Nigeria, KSA and UAE
 - Contact: noraiz@ciylo.com, +92 301 6475925, 9-A Aitchison Society, Lahore 53700
+
+## 🔍 SEO audit follow-ups (Nov 2026) needing your input
+
+The Claude SEO audit's technical, schema and quick content fixes are done. These need decisions or facts from you:
+- [ ] **Testimonials:** the three quotes are placeholders attributed to real clients and show live. Get approval or hide them before launch (auditors flagged this as the biggest trust risk).
+- [ ] **"2 US partner companies":** name them, or we remove the proof point.
+- [ ] **Tosin's bio / About heading "Fortune 10 discipline":** confirm wording (Microsoft and Comcast aren't always Fortune 10).
+- [ ] **Hardware case studies:** all 10 published studies are software; 2–3 hardware ones (anonymised is fine) would back the embedded/PCB/IoT pages.
+- [ ] **Dedicated service pages:** we can build `/services/<id>` pages (embedded, PCB, IoT, edge AI, MVP) once you confirm tools/process details for each.
+- [ ] **FAQ answers:** NDA/IP ownership, typical timelines and cost ranges you're happy to publish.
+- [ ] **Brand consistency:** the old site uses "CiyloTech" and ciylotech socials; pick one name and handle set, then we can create a Wikidata entry.
+- [ ] **CEO facts:** founding year and background for Noraiz's bio.
+- [ ] **At launch:** set `NEXT_PUBLIC_SITE_URL` to the real domain and remove `NEXT_PUBLIC_ALLOW_INDEXING=false` (pages then drop noindex and robots.txt opens).

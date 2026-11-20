@@ -52,7 +52,7 @@ export function CiylotronCard({
               "absolute transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]",
               p.portrait === "photo"
                 ? "inset-0 h-full w-full object-cover object-top"
-                : "inset-x-0 bottom-0 mx-auto h-[92%] w-auto max-w-none object-contain object-bottom",
+                : "bottom-0 left-1/2 h-[92%] w-auto max-w-none -translate-x-1/2 object-contain object-bottom",
             )}
           />
           <span className="absolute top-3 left-3 rounded-full bg-white/80 px-2.5 py-1 font-semibold text-[10px] tracking-wide text-ink-900 uppercase backdrop-blur">

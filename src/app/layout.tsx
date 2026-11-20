@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Mona_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Mona_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -13,12 +13,6 @@ import { siteGraph } from "@/lib/schema";
 const sans = Mona_Sans({
   variable: "--font-sans-face",
   subsets: ["latin"],
-  display: "swap",
-});
-const mono = IBM_Plex_Mono({
-  variable: "--font-mono-face",
-  subsets: ["latin"],
-  weight: ["400", "500"],
   display: "swap",
 });
 
@@ -65,7 +59,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="en" className={`${sans.variable}`}>
       <body className="bg-ink-900">
         <a
           href="#main"

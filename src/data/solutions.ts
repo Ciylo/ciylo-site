@@ -45,7 +45,7 @@ export const solutions: Solution[] = [
   {
     slug: "wearable-health-monitoring",
     name: "Wearable Health Monitoring",
-    short: "A medical-grade wearable, companion app and care-team dashboard, engineered together.",
+    short: "A health wearable designed toward medical-device standards, with a companion app and care-team dashboard, engineered together.",
     hero: "Continuous health insight, from the wrist to the care team.",
     problem:
       "Spot checks miss what happens between appointments. Care teams need continuous, trustworthy signals, and patients need a device they'll actually wear.",

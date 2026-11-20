@@ -30,7 +30,7 @@ export function Industries() {
                 <span className="absolute inset-0 origin-left scale-x-0 bg-teal-50 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-x-100" />
                 <span className="relative flex items-baseline gap-3 text-[clamp(19px,2vw,23px)] font-bold tracking-[-0.02em] transition-transform duration-500 group-hover:translate-x-3">
                   {r.name}
-                  {r.work.length > 0 && <sup className="font-mono text-xs font-normal text-teal-700">{r.work.length}</sup>}
+                  {r.work.length > 0 && <sup className="font-semibold tabular-nums text-xs font-normal text-teal-700">{r.work.length}</sup>}
                 </span>
                 <span className="relative flex items-center gap-3 text-sm text-ink-500 transition-transform duration-500 group-hover:-translate-x-3">
                   {r.detail}

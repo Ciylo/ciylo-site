@@ -74,7 +74,7 @@ export default function ServicesPage() {
                 className="group relative flex flex-col gap-3 rounded-[20px] bg-ink-900 p-5 text-white transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_50px_-20px_rgb(0_61_51/0.7)]"
               >
                 <span className="flex items-center justify-between font-semibold text-xs text-teal-400">
-                  <span className="relative z-20 grid size-7 place-items-center rounded-full bg-teal-500 font-mono text-[11px] text-ink-900 ring-4 ring-ink-900 transition-transform duration-300 group-hover:scale-110">
+                  <span className="relative z-20 grid size-7 place-items-center rounded-full bg-teal-500 font-semibold tabular-nums text-[11px] text-ink-900 ring-4 ring-ink-900 transition-transform duration-300 group-hover:scale-110">
                     {p.step}
                   </span>
                   {i < mvpPipeline.length - 1 && <span className="hidden text-ink-500 lg:inline">→</span>}

@@ -105,7 +105,7 @@ export default function CareersPage() {
           <RevealGroup className="grid gap-px overflow-hidden rounded-[24px] border border-ink-700 bg-ink-700 sm:grid-cols-2 lg:grid-cols-3">
             {growth.map((g, i) => (
               <RevealItem key={g.title} className="flex flex-col gap-3 bg-ink-900 p-7 transition-colors hover:bg-ink-850">
-                <span className="font-mono text-xs text-teal-500">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-semibold tabular-nums text-xs text-teal-500">{String(i + 1).padStart(2, "0")}</span>
                 <strong className="text-xl tracking-[-0.01em]">{g.title}</strong>
                 <p className="text-[15px] leading-relaxed text-ink-200">{g.desc}</p>
               </RevealItem>

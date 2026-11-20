@@ -161,7 +161,7 @@ export default async function SolutionPage({
               >
                 <span
                   className={cn(
-                    "relative z-10 grid size-11 place-items-center rounded-full font-mono text-[13px]",
+                    "relative z-10 grid size-11 place-items-center rounded-full font-semibold tabular-nums text-[13px]",
                     i === s.phases.length - 1
                       ? "bg-teal-500 text-ink-900"
                       : "bg-ink-900 text-teal-500",

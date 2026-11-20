@@ -31,7 +31,7 @@ export function CiylotronGrid() {
                   <motion.span layoutId="disc-pill" className="absolute inset-0 rounded-full bg-ink-900" transition={{ type: "spring", stiffness: 420, damping: 34 }} />
                 )}
                 <span className="relative">
-                  {d} <span className="font-mono text-[11px] opacity-60">{count}</span>
+                  {d} <span className="font-semibold tabular-nums text-[11px] opacity-60">{count}</span>
                 </span>
               </button>
             );

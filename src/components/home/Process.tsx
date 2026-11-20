@@ -29,7 +29,7 @@ function Step({ i, progress, title, desc }: { i: number; progress: MotionValue<n
     <li className="relative flex gap-5 lg:flex-col lg:gap-4">
       <motion.span
         style={{ backgroundColor: last ? undefined : bg, borderColor: border, scale }}
-        className={`relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-2 font-mono text-[13px] ${
+        className={`relative z-10 grid size-11 shrink-0 place-items-center rounded-full border-2 font-semibold tabular-nums text-[13px] ${
           last ? "bg-teal-500 text-ink-900" : "text-teal-500"
         }`}
       >

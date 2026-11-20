@@ -35,7 +35,7 @@ export function WhyCiylo() {
               <div className="absolute inset-0 bg-gradient-to-t from-ink-900/80 via-transparent to-transparent" />
               <p className="absolute right-4 bottom-4 left-4 flex items-center justify-between text-sm">
                 <span className="font-semibold">The CiyloCore · Skardu 2026</span>
-                <span className="font-mono text-xs text-teal-400">2,228 m</span>
+                <span className="font-semibold tabular-nums text-xs text-teal-400">2,228 m</span>
               </p>
             </Reveal>
           </div>
@@ -67,7 +67,7 @@ export function WhyCiylo() {
                   role="listitem"
                   className="group grid grid-cols-[48px_1fr] gap-4 border-t border-ink-700 py-6 last:border-b"
                 >
-                  <span className="font-mono text-[13px] text-teal-500 transition-transform duration-300 group-hover:translate-x-1">
+                  <span className="font-semibold tabular-nums text-[13px] text-teal-500 transition-transform duration-300 group-hover:translate-x-1">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div className="flex flex-col gap-2">

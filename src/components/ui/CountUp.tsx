@@ -41,7 +41,8 @@ export function CountUp({
         {suffix}
       </span>
       <span aria-hidden>
-        <span ref={out}>{reduce ? to : 0}</span>
+        {/* Server HTML carries the real number (crawlers, no-JS); it re-counts from 0 when scrolled into view */}
+        <span ref={out}>{to}</span>
         {suffix}
       </span>
     </span>

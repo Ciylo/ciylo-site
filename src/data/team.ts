@@ -52,7 +52,7 @@ export const ciylotrons: Ciylotron[] = [
   { slug: "hassan-ijaz", name: "Hassan Ijaz", role: "Embedded Systems Engineer", discipline: "Hardware", honours: ["Performer of the Month · Sep"] },
   { slug: "suleman-zafar", name: "Suleman Zafar", role: "PCB Engineer", discipline: "Hardware" },
   { slug: "taimoor-hassan", name: "Taimoor Hassan", role: "Hardware Design Engineer", discipline: "Hardware" },
-  { slug: "muhammad-kaif", name: "Muhammad Kaif", role: "Embedded Systems Engineer", discipline: "Hardware", image: "muhammad-kaif-portrait" },
+  { slug: "muhammad-kaif", name: "Muhammad Kaif", role: "Embedded Systems Engineer", discipline: "Hardware", image: "muhammad-kaif-portrait-v2" },
   { slug: "asif-shahzad", name: "Asif Shahzad", role: "AI Engineer", discipline: "AI", honours: ["Performer of the Month · Aug"] },
   { slug: "muhammad-faizan", name: "Muhammad Faizan", role: "AI Engineer", discipline: "AI", honours: ["Performer of the Month · Aug"] },
   { slug: "asad-khalid", name: "Asad Khalid", role: "AI Developer", discipline: "AI", honours: ["Performer of the Month · Jun 2026"] },

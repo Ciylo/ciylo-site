@@ -52,7 +52,7 @@ export default async function IndustryPage({
       <PageHero kicker={`Industries · ${i.name}`} title={i.hero} lead={i.intro}>
         <Reveal delay={0.45} className="flex flex-wrap gap-3 pt-2">
           <Button href={cta} arrow>
-            Talk to our {i.name.split(" ")[0].toLowerCase()} team
+            Talk to us about {i.name}
           </Button>
           <Button href="/industries" variant="ghost-dark">
             All industries
@@ -88,7 +88,7 @@ export default async function IndustryPage({
                   role="listitem"
                   className="flex items-center gap-4 border-t border-ink-150 py-4 last:border-b sm:[&:nth-last-child(2):nth-child(odd)]:border-b"
                 >
-                  <span className="font-mono text-xs text-teal-700">
+                  <span className="font-semibold tabular-nums text-xs text-teal-700">
                     {String(n + 1).padStart(2, "0")}
                   </span>
                   <span className="text-lg font-semibold tracking-[-0.01em]">

@@ -334,7 +334,7 @@ export function FlowDiagram({
               >
                 ←
               </button>
-              <span className="min-w-12 text-center font-mono text-xs text-ink-300 tabular-nums">
+              <span className="min-w-12 text-center font-semibold tabular-nums text-xs text-ink-300 tabular-nums">
                 {String(idx + 1).padStart(2, "0")} /{" "}
                 {String(diagram.nodes.length).padStart(2, "0")}
               </span>

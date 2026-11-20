@@ -15,12 +15,27 @@ const styles: Record<Variant, string> = {
   light: "bg-white text-ink-900 hover:bg-teal-50 font-semibold",
 };
 
+/** Flood variant: the button keeps its base colour; the growing dot repaints it */
+const floodStyles: Partial<Record<Variant, string>> = {
+  primary: "isolate overflow-hidden !bg-teal-500 [&::after]:hidden hover:text-white focus-visible:text-white delay-75",
+  "ghost-dark": "isolate overflow-hidden !bg-ink-750 hover:text-ink-900 focus-visible:text-ink-900 delay-75",
+  dark: "isolate overflow-hidden !bg-ink-900 hover:text-ink-900 focus-visible:text-ink-900 delay-75",
+};
+const floodDot: Partial<Record<Variant, string>> = { primary: "bg-ink-900", "ghost-dark": "bg-teal-500", dark: "bg-teal-500" };
+const floodDotHover: Partial<Record<Variant, string>> = {
+  primary: "group-hover:bg-teal-500 group-focus-visible:bg-teal-500",
+  "ghost-dark": "group-hover:bg-ink-900 group-focus-visible:bg-ink-900",
+  dark: "group-hover:bg-ink-900 group-focus-visible:bg-ink-900",
+};
+
 type Props = Omit<ComponentProps<typeof Link>, "className"> & {
   variant?: Variant;
   size?: "md" | "lg";
   dot?: boolean;
   arrow?: boolean;
   magnetic?: boolean;
+  /** "Let's talk" style: a dot that grows to flood the button on hover */
+  flood?: boolean;
   className?: string;
   children: ReactNode;
 };
@@ -31,6 +46,7 @@ export function Button({
   dot,
   arrow,
   magnetic = true,
+  flood = false,
   className,
   children,
   ...rest
@@ -42,9 +58,27 @@ export function Button({
         "group relative inline-flex items-center justify-center gap-2.5 rounded-full transition-[color,background-color,border-color,box-shadow] duration-300",
         size === "lg" ? "px-7 py-4 text-base" : "px-5 py-3 text-[15px]",
         styles[variant],
+        flood && floodStyles[variant],
         className,
       )}
     >
+      {flood && (
+        <span className="relative size-2 shrink-0" aria-hidden>
+          <span
+            className={cn(
+              "absolute inset-0 -z-10 rounded-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[56] group-focus-visible:scale-[56]",
+              floodDot[variant],
+            )}
+          />
+          <span
+            className={cn(
+              "absolute inset-0 animate-pulse-dot rounded-full transition-colors duration-300",
+              floodDot[variant],
+              floodDotHover[variant],
+            )}
+          />
+        </span>
+      )}
       {dot && (
         <span
           className="size-2 animate-pulse-dot rounded-full bg-teal-500"

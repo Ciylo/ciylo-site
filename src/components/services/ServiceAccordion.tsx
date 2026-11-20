@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { AnimatePresence, motion, LayoutGroup } from "motion/react";
+import { motion, LayoutGroup } from "motion/react";
 import { useEffect, useState } from "react";
 import { services, serviceGroups, type ServiceGroup } from "@/data/services";
 import { getWork } from "@/data/work";
@@ -106,7 +106,7 @@ export function ServiceAccordion() {
                       onClick={() => setOpen((o) => (isOpen ? o.filter((x) => x !== s.id) : [...o, s.id]))}
                       className="flex w-full flex-wrap items-center gap-x-5 gap-y-3 px-5 py-5 text-left sm:px-[26px] sm:py-[22px]"
                     >
-                      <span className="w-7 font-mono text-[13px] text-ink-500">{String(n).padStart(2, "0")}</span>
+                      <span className="w-7 font-semibold tabular-nums text-[13px] text-ink-500">{String(n).padStart(2, "0")}</span>
                       <span className="flex-[1_1_240px] text-[clamp(18px,2vw,22px)] font-bold tracking-[-0.02em]">{s.name}</span>
                       <span
                         className={cn(
@@ -130,14 +130,14 @@ export function ServiceAccordion() {
                         +
                       </span>
                     </button>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
+                    {/* Always in the HTML (crawlers, find-in-page); collapsed panels are inert */}
                         <motion.div
                           id={`${s.id}-panel`}
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
+                          initial={false}
+                          animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
                           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                          className="overflow-hidden"
+                          inert={!isOpen}
                         >
                           <div className="flex flex-col gap-6 px-5 pb-7 sm:pr-[26px] sm:pl-[74px]">
                             <p className="max-w-[760px] text-[15px] leading-relaxed text-ink-600">{s.intro}</p>
@@ -219,8 +219,6 @@ export function ServiceAccordion() {
                             </div>
                           </div>
                         </motion.div>
-                      )}
-                    </AnimatePresence>
                   </motion.div>
                 );
               })}
