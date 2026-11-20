@@ -10,9 +10,11 @@ import { SplitHeading } from "@/components/ui/SplitHeading";
 import { engagementModels, mvpPipeline, services } from "@/data/services";
 import { site } from "@/data/site";
 import { cn } from "@/lib/cn";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, serviceList } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Services",
+  title: "Embedded, IoT, AI & Software Engineering Services",
   description:
     "Embedded firmware, PCB design, IoT, edge AI, AI engineering, web, mobile, SaaS, e-commerce, ERP/CRM, cloud and end-to-end product development with an MVP pipeline.",
   alternates: { canonical: "/services" },
@@ -21,6 +23,7 @@ export const metadata: Metadata = {
 export default function ServicesPage() {
   return (
     <>
+      <JsonLd data={[breadcrumbs([["Services", "/services"]]), serviceList(services)]} />
       <PageHero
         kicker="Services · Silicon to screen"
         title="Pick one layer, or hand us the whole stack."

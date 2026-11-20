@@ -8,10 +8,13 @@ import { Button } from "@/components/ui/Button";
 import { services } from "@/data/services";
 import { ciylotrons } from "@/data/team";
 import { cn } from "@/lib/cn";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Our Divisions",
-  description: "Ciylo Software Studio and Ciylo Hardware Lab: two divisions, one roadmap.",
+  description:
+    "Ciylo Software Studio and Ciylo Hardware Lab: two divisions in Lahore sharing one roadmap, covering PCB design, firmware, IoT, AI, web, mobile and SaaS.",
   alternates: { canonical: "/about/divisions" },
 };
 
@@ -43,6 +46,7 @@ const divisions = [
 export default function DivisionsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["About", "/about"], ["Our Divisions", "/about/divisions"]])} />
       <PageHero
         kicker="About · Our divisions"
         title="Two divisions. One roadmap."

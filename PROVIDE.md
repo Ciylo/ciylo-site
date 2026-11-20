@@ -26,7 +26,8 @@ _Last updated: 19 Nov 2026_
 ## 🟡 Images (higher resolution wanted)
 
 These portraits are under 450 px and look soft on large screens:
-- [ ] Hamza Tanveer and Muhammad Kaif (400 px originals), Danish, Abuzar, Zaid Tahir, Mohsin Khan, Raheel Niaz, Huzaifa, Taimoor Hassan
+- [x] Muhammad Kaif: full-resolution portrait received and processed (Nov 2026)
+- [ ] Hamza Tanveer (400 px original), Danish, Abuzar, Zaid Tahir, Mohsin Khan, Raheel Niaz, Huzaifa, Taimoor Hassan
 
 Also useful:
 - [ ] More **lab and project photos**: PCBs, prototypes, devices in the field, kiosks, robots.

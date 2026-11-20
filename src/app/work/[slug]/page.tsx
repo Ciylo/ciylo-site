@@ -10,6 +10,8 @@ import { Button } from "@/components/ui/Button";
 import { CoverParallax } from "@/components/work/CoverParallax";
 import { WorkCard } from "@/components/work/WorkCard";
 import { cn } from "@/lib/cn";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, caseStudy } from "@/lib/schema";
 
 export function generateStaticParams() {
   return work.map((c) => ({ slug: c.slug }));
@@ -39,6 +41,7 @@ export default async function CaseStudyPage({ params }: PageProps<"/work/[slug]"
 
   return (
     <>
+      <JsonLd data={[breadcrumbs([["Work", "/work"], [c.name, `/work/${c.slug}`]]), caseStudy(c)]} />
       {/* Hero */}
       <section className="relative isolate overflow-hidden bg-ink-900 pt-40 pb-28 text-white sm:pt-44 sm:pb-32">
         <div aria-hidden className="grid-bg absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_50%_0%,#000_30%,transparent_75%)]" />

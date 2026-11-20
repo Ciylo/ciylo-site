@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/Button";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ciylotrons, disciplines } from "@/data/team";
 import { site } from "@/data/site";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Teams · The Ciylotrons",
-  description: `Meet the Ciylotrons: a ${site.teamSize}-person team across hardware, software, AI, design and growth.`,
+  description: `Meet the Ciylotrons: a ${site.teamSize}-person team of embedded, PCB, firmware, software, AI, QA, design and growth engineers at Ciylo's studio in Lahore.`,
   alternates: { canonical: "/about/teams" },
 };
 
@@ -25,6 +27,7 @@ const blurbs: Record<string, string> = {
 export default function TeamsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["About", "/about"], ["Teams", "/about/teams"]])} />
       <PageHero
         kicker={`About · ${site.teamSize} Ciylotrons`}
         title="Meet the teams."

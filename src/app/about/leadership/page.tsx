@@ -6,16 +6,20 @@ import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Reveal } from "@/components/ui/Reveal";
 import { Button } from "@/components/ui/Button";
 import { leadership } from "@/data/team";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, person } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Leadership",
-  description: "The leadership of the CiyloCore: Noraiz Azam (CEO) and Tosin Omolewu (CPO).",
+  description:
+    "Meet the leadership of the CiyloCore: Noraiz Azam (CEO) and Tosin Omolewu (CPO), steering Ciylo's hardware, firmware, AI and software engineering teams.",
   alternates: { canonical: "/about/leadership" },
 };
 
 export default function LeadershipPage() {
   return (
     <>
+      <JsonLd data={[breadcrumbs([["About", "/about"], ["Leadership", "/about/leadership"]]), ...leadership.map(person)]} />
       <PageHero
         kicker="About · Leadership"
         title="Leading the CiyloCore."

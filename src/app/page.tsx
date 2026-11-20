@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Hero } from "@/components/home/Hero";
 import { Statement } from "@/components/home/Statement";
 import { ServicesBento } from "@/components/home/ServicesBento";
@@ -16,6 +17,11 @@ import { join } from "node:path";
 
 // Background footage slot: drop a muted loop at public/video/hero.mp4
 const heroVideo = existsSync(join(process.cwd(), "public/video/hero.mp4")) ? "/video/hero.mp4" : undefined;
+
+export const metadata: Metadata = {
+  title: { absolute: "Ciylo: Embedded, IoT, AI & Software Engineering Company in Lahore" },
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

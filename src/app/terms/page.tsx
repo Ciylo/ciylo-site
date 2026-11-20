@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
 import { site } from "@/data/site";
 
-export const metadata: Metadata = { title: "Terms of Service", alternates: { canonical: "/terms" } };
+export const metadata: Metadata = {
+  title: "Terms of Service",
+  description: "The terms that govern use of the Ciylo website, including intellectual property, acceptable use, liability and how to contact Ciylo.",
+  alternates: { canonical: "/terms" },
+};
 
 // NOTE: Draft for legal review (see PROVIDE.md). Covers use of this website only;
 // client engagements are governed by their own signed agreements.

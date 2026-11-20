@@ -26,6 +26,8 @@ Node 20+ is required (developed on Node 24).
 |---|---|---|
 | `npm run images:manifest` | Reads every raster in `public/images` and writes intrinsic sizes to `src/data/image-manifest.json`, so `next/image` renders without layout shift | After adding or replacing any image |
 | `npm run map` | Regenerates the dotted world map (`public/images/world-dots.svg`) and pin positions (`src/data/map-pins.json`) from `clientCountries` in `src/data/site.ts` | After changing client countries |
+| `npm run globe` | Regenerates the land dots for the 3D client globe (`public/data/globe.json`, loaded lazily) | Rarely (only if the dot density should change) |
+| `npm run countries` | Bakes English country names for the phone picker into `src/data/country-names.json`, so server and browsers render identical text | After upgrading `libphonenumber-js` |
 
 ---
 
@@ -113,15 +115,22 @@ Defined as Tailwind v4 theme tokens in `src/app/globals.css`. The brand teal `#0
 
 **Secondary accents** (from Figma, use sparingly): `cyan-500 #00ABBC`, `lime-400 #A5F31E`, `graphite #434343` (the logo mark grey).
 
-**Type:** Inter (400–800) for everything; JetBrains Mono for kickers, tags and numbers. Display headings are 800 weight with tight tracking (−0.03 to −0.045em).
+**Type:** Mona Sans (GitHub's variable grotesk, 200–900) for everything, chosen as a less common, engineered alternative to Inter in the spirit of SF Pro / NVIDIA Sans (both of which are licence-restricted). IBM Plex Mono only for small numeric labels. Kickers (`.kicker`) are tracked uppercase sans, not monospace. Display headings are 800 weight with tight tracking (−0.03 to −0.045em).
 
 **Shape:** pills for buttons and chips; 22px cards; 28px panels; flat colour blocks, with shadows only on floating UI.
 
 **Logos:** `public/brand/` holds true vector exports from the brand Figma: `ciylo-logo.svg` (light backgrounds), `ciylo-logo-dark.svg` (dark), `ciylo-logo-mono-white.svg`, and `ciylo-mark*.svg`.
 
+### Diagrams
+
+Interactive architecture diagrams replace stand-in photos wherever no relevant photo exists: the three solution pages, five industry pages (energy, oil & gas, manufacturing, agriculture, restaurants) and the homepage "CiyloCore" stack. Data lives in `src/data/diagrams.ts` (nodes on a grid with separate desktop `d` and phone `m` positions, plus edges). `components/diagram/FlowDiagram.tsx` renders them with hover/focus/tap highlighting, flowing data packets, an auto-tour and a details panel; `DiagramThumb.tsx` renders static SVG miniatures for index cards. Industries opt in with `diagram: "<id>"` in `industries.ts`.
+
 ### Motion
 
-- Lenis smooth scrolling, word-by-word heading reveals, scroll-linked statement highlight, count-ups, an animated oscilloscope hero, magnetic buttons, cursor spotlights, parallax galleries, a scroll-driven process rail, layout-animated filters, marquees, and arcs on the client map.
+- Lenis smooth scrolling, word-by-word heading reveals, scroll-linked statement highlight, count-ups, a crossfading photo hero with Ken Burns motion, magnetic buttons, cursor spotlights, parallax galleries, a scroll-driven process rail, layout-animated filters, marquees, and arcs on the client globe.
+- 3D: tilt-and-glare cards (`ui/Tilt.tsx`, mouse/pen only), a draggable canvas globe of client countries (`home/Globe.tsx`), hero scroll parallax, gradient-shimmer accents, button light sweeps, an animated MVP pipeline, a scroll progress bar, and a view-transition morph from a work card's cover into its case-study hero.
+- Reveals and split headings are CSS transitions driven by one shared IntersectionObserver (`lib/useInViewOnce.ts`); the hero entrance is pure CSS so the LCP text paints before JavaScript.
+- Loading: route skeletons (`app/loading.tsx`, `app/work/[slug]/loading.tsx`), a globe skeleton, and dominant-colour placeholders for photos (stored in the image manifest).
 - Every animation respects `prefers-reduced-motion`: `MotionConfig reducedMotion="user"` globally, plus `useReducedMotionSafe()` for scroll-linked effects, which hydrates identically on server and client.
 
 ### Accessibility
@@ -162,5 +171,6 @@ Skip link; every menu, filter and accordion uses buttons with `aria-expanded`, `
 
 ## Maintenance notes
 
+- Performance (Nov 2026, calibrated Lighthouse): desktop ~94, mobile ~60 (CLS 0, LCP = FCP). Avoid wrapping the whole app in a `<ViewTransition>`: it routes streamed Suspense reveals through `startViewTransition` and cost seconds of main-thread time.
 - Bump `copyrightYear` in `src/data/site.ts` each January (it is static so pages stay prerendered).
 - This Next.js version has breaking changes from older docs; check `node_modules/next/dist/docs/` before upgrading patterns (see `AGENTS.md`).

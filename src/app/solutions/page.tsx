@@ -7,6 +7,8 @@ import { Tilt } from "@/components/ui/Tilt";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ContactSection } from "@/components/home/ContactSection";
 import { solutions } from "@/data/solutions";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Solutions",
@@ -18,6 +20,7 @@ export const metadata: Metadata = {
 export default function SolutionsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["Solutions", "/solutions"]])} />
       <PageHero
         kicker="Solutions · Ready to deploy"
         title="Proven building blocks, shipped as one package."

@@ -8,9 +8,11 @@ import { Tilt } from "@/components/ui/Tilt";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { ContactSection } from "@/components/home/ContactSection";
 import { industryPages } from "@/data/industries";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Industries",
+  title: "Industries We Build Technology For",
   description:
     "Who we build for: healthcare, pharmaceutical, energy, oil & gas, manufacturing, agriculture, retail, restaurants, telecom, education, proptech and field service.",
   alternates: { canonical: "/industries" },
@@ -19,6 +21,7 @@ export const metadata: Metadata = {
 export default function IndustriesPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["Industries", "/industries"]])} />
       <PageHero
         kicker="Industries · Who we build for"
         title="Deep domain knowledge, wherever you operate."

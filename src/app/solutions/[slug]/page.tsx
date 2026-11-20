@@ -12,6 +12,8 @@ import { Button } from "@/components/ui/Button";
 import { ServiceCards } from "@/components/ServiceChips";
 import { contactHref } from "@/lib/contact";
 import { cn } from "@/lib/cn";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs, solutionService } from "@/lib/schema";
 
 export function generateStaticParams() {
   return solutions.map((s) => ({ slug: s.slug }));
@@ -24,8 +26,8 @@ export async function generateMetadata({
   const s = getSolution(slug);
   if (!s) return {};
   return {
-    title: s.name,
-    description: s.short,
+    title: `${s.name} Solution: Hardware, App & Cloud`,
+    description: `${s.short} Designed, built and supported end to end by Ciylo in Lahore.`,
     alternates: { canonical: `/solutions/${s.slug}` },
   };
 }
@@ -47,6 +49,7 @@ export default async function SolutionPage({
 
   return (
     <>
+      <JsonLd data={[breadcrumbs([["Solutions", "/solutions"], [s.name, `/solutions/${s.slug}`]]), solutionService(s)]} />
       <PageHero kicker={`Solutions · ${s.name}`} title={s.hero} lead={s.short}>
         <Reveal delay={0.45} className="flex flex-wrap gap-3 pt-2">
           <Button href={cta} arrow>

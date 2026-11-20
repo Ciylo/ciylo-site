@@ -15,6 +15,8 @@ import { CiylotronCard } from "@/components/about/CiylotronCard";
 import { leadership, ciylotrons } from "@/data/team";
 import { recognitions } from "@/data/culture";
 import { site } from "@/data/site";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "About · The CiyloCore",
@@ -28,6 +30,7 @@ export default function AboutPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbs([["About", "/about"]])} />
       <PageHero
         kicker="About Ciylo · The CiyloCore"
         title="We are the CiyloCore."

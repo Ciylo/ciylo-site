@@ -6,10 +6,12 @@ import { Offices } from "@/components/Offices";
 import { SocialStrip } from "@/components/about/SocialStrip";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { site } from "@/data/site";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: `Start a project with Ciylo. Email ${site.email}, call ${site.phone} or visit our studio in Lahore.`,
+  title: "Contact Us: Start Your Hardware or Software Project",
+  description: `Start a hardware, IoT, AI or software project with Ciylo. Email ${site.email}, call ${site.phone} or visit our studio in Aitchison Society, Lahore. We reply within one working day.`,
   alternates: { canonical: "/contact" },
 };
 
@@ -20,6 +22,7 @@ const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURICom
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["Contact", "/contact"]])} />
       <PageHero
         kicker="Contact · Let's build"
         title="Let's build your idea."

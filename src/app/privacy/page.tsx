@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { LegalPage } from "@/components/LegalPage";
 import { site } from "@/data/site";
 
-export const metadata: Metadata = { title: "Privacy Policy", alternates: { canonical: "/privacy" } };
+export const metadata: Metadata = {
+  title: "Privacy Policy",
+  description: "How Ciylo collects, uses and protects personal data from website visitors, clients and job applicants, and how to contact us about your data.",
+  alternates: { canonical: "/privacy" },
+};
 
 // NOTE: Draft for legal review (see PROVIDE.md). Describes how this website behaves today.
 export default function PrivacyPage() {

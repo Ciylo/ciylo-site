@@ -7,6 +7,8 @@ import { SmoothScroll } from "@/components/layout/SmoothScroll";
 import { MotionProvider } from "@/components/layout/MotionProvider";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { site } from "@/data/site";
+import { JsonLd } from "@/components/JsonLd";
+import { siteGraph } from "@/lib/schema";
 
 const sans = Mona_Sans({
   variable: "--font-sans-face",
@@ -19,6 +21,8 @@ const mono = IBM_Plex_Mono({
   weight: ["400", "500"],
   display: "swap",
 });
+
+const indexingAllowed = process.env.NEXT_PUBLIC_ALLOW_INDEXING !== "false";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -49,7 +53,8 @@ export const metadata: Metadata = {
     url: "/",
   },
   twitter: { card: "summary_large_image" },
-  alternates: { canonical: "/" },
+  // Pre-launch: NEXT_PUBLIC_ALLOW_INDEXING=false adds noindex to every page (robots.txt alone doesn't stop indexing)
+  robots: indexingAllowed ? { index: true, follow: true } : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {
@@ -57,24 +62,6 @@ export const viewport: Viewport = {
   colorScheme: "light",
 };
 
-const orgJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: site.name,
-  legalName: site.legalName,
-  url: site.url,
-  logo: `${site.url}/brand/ciylo-logo.svg`,
-  email: site.email,
-  telephone: site.phone,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: site.address.city,
-    postalCode: site.address.postalCode,
-    addressCountry: "PK",
-  },
-  sameAs: site.socials.map((s) => s.href),
-};
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
@@ -95,10 +82,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           </main>
           <Footer />
         </MotionProvider>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
-        />
+        <JsonLd data={siteGraph()} />
       </body>
     </html>
   );

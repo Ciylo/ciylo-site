@@ -8,9 +8,11 @@ import { Traits } from "@/components/about/Traits";
 import { Moments } from "@/components/about/Moments";
 import { RolesBoard } from "@/components/careers/RolesBoard";
 import { site } from "@/data/site";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: "Careers",
+  title: "Careers: Hardware, Software & AI Jobs in Lahore",
   description:
     "Become a Ciylotron. Join Ciylo's Lahore studio to build hardware, firmware, AI and software with creative freedom and real ownership.",
   alternates: { canonical: "/careers" },
@@ -28,6 +30,7 @@ const growth = [
 export default function CareersPage() {
   return (
     <>
+      <JsonLd data={breadcrumbs([["Careers", "/careers"]])} />
       <PageHero
         kicker="Careers · Become a Ciylotron"
         title="Do the best work of your life, with creative freedom."

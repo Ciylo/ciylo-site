@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/Button";
 import { ServiceCards } from "@/components/ServiceChips";
 import { WorkCard } from "@/components/work/WorkCard";
 import { contactHref } from "@/lib/contact";
+import { JsonLd } from "@/components/JsonLd";
+import { breadcrumbs } from "@/lib/schema";
 
 export function generateStaticParams() {
   return industryPages.map((i) => ({ slug: i.slug }));
@@ -46,6 +48,7 @@ export default async function IndustryPage({
 
   return (
     <>
+      <JsonLd data={breadcrumbs([["Industries", "/industries"], [i.name, `/industries/${i.slug}`]])} />
       <PageHero kicker={`Industries · ${i.name}`} title={i.hero} lead={i.intro}>
         <Reveal delay={0.45} className="flex flex-wrap gap-3 pt-2">
           <Button href={cta} arrow>
