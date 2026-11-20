@@ -207,7 +207,7 @@
 .reveal,
 .reveal-item {
   opacity: 0;
-  transform: translate3d(0, var(--rv-y, 24px), 0);
+  transform: translateY(var(--rv-y, 24px));
   transition:
     opacity 0.8s var(--ease-out-expo),
     transform 0.8s var(--ease-out-expo);
@@ -272,7 +272,7 @@
 /* Split headings: words slide up out of a mask */
 .split-word {
   display: inline-block;
-  transform: translate3d(0, 110%, 0);
+  transform: translateY(110%);
   transition: transform 0.9s var(--ease-out-expo);
   transition-delay: calc(var(--sp-delay, 0s) + var(--i) * 60ms);
 }
@@ -285,7 +285,7 @@
 }
 @keyframes split-up {
   from {
-    transform: translate3d(0, 110%, 0);
+    transform: translateY(110%);
   }
   to {
     transform: none;
@@ -300,7 +300,7 @@
 @keyframes hero-in {
   from {
     opacity: 0;
-    transform: translate3d(0, 16px, 0);
+    transform: translateY(16px);
   }
 }
 

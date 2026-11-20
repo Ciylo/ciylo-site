@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { AnimatePresence, motion, useInView } from "motion/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import { layerColor, type Diagram, type DiagramNode } from "@/data/diagrams";
 import { useReducedMotionSafe } from "@/lib/useReducedMotionSafe";
 import { cn } from "@/lib/cn";
@@ -173,6 +173,21 @@ function Canvas({
   );
 }
 
+const LG = "(min-width: 1024px)";
+const subscribeLg = (cb: () => void) => {
+  const m = window.matchMedia(LG);
+  m.addEventListener("change", cb);
+  return () => m.removeEventListener("change", cb);
+};
+/** "d" (desktop) or "m" (phone/tablet) once hydrated; null on the server */
+function useLayoutMode(): Mode | null {
+  return useSyncExternalStore(
+    subscribeLg,
+    () => (window.matchMedia(LG).matches ? "d" : "m"),
+    () => null,
+  );
+}
+
 /**
  * Interactive architecture diagram. Hover, focus or tap a node to light up its
  * connections; packets flow along every link. Auto-tours the nodes while in
@@ -186,6 +201,7 @@ export function FlowDiagram({
   className?: string;
 }) {
   const reduced = useReducedMotionSafe();
+  const mode = useLayoutMode();
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { amount: 0.3 });
   const [active, setActive] = useState(diagram.nodes[0].id);
@@ -257,22 +273,12 @@ export function FlowDiagram({
       </div>
 
       <div className="px-3 pt-4 pb-2 sm:px-6 lg:px-8 lg:pt-8 lg:pb-6">
-        <Canvas
-          dg={diagram}
-          mode="d"
-          active={active}
-          onPick={pick}
-          animate={animate}
-          className="hidden lg:block"
-        />
-        <Canvas
-          dg={diagram}
-          mode="m"
-          active={active}
-          onPick={pick}
-          animate={animate}
-          className="lg:hidden"
-        />
+        {mode ? (
+          <Canvas dg={diagram} mode={mode} active={active} onPick={pick} animate={animate} />
+        ) : (
+          // Before hydration: reserve the space with a skeleton (one layout is rendered, not both)
+          <div aria-hidden className="skeleton skeleton-dark w-full rounded-2xl" style={{ aspectRatio: `${diagram.cols * 100} / ${diagram.rows * 50}` }} />
+        )}
       </div>
 
       <div className="border-t border-ink-700/80 bg-ink-850/70 px-5 py-5 backdrop-blur sm:px-8">
